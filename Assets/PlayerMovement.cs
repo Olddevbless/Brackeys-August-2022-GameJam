@@ -13,25 +13,29 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce= 10;
     [SerializeField] bool isGrounded;
     [SerializeField] public bool playerIsMoving;
+    [SerializeField] FollowPlayer doggo;
     
 
     private void Awake()
     {
         playerRB = this.GetComponent<Rigidbody>();
-           
+        doggo = FindObjectOfType<FollowPlayer>();
 
     }
 
     private void Update()
     {
         horizontal = Input.GetAxis("Horizontal");
-        if (playerRB.velocity != Vector3.zero)
+       
+        
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            playerIsMoving = true;
+            doggo.Stay();
+            
         }
-        else
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            playerIsMoving = false;
+            doggo.ComeHere();
         }
         Movement();
         Jump();
@@ -51,12 +55,14 @@ public class PlayerMovement : MonoBehaviour
            
             //playerRB.AddForce(new Vector3(horizontal, 0, 0)*speed, ForceMode.Force);
             this.transform.Translate(new Vector3(horizontal,0,0) * speed * Time.deltaTime);
+            playerIsMoving = true ;
         }
         if (Input.GetKey(KeyCode.D))
         {
             
             //playerRB.AddForce(new Vector3(horizontal, 0, 0) * speed, ForceMode.Force);
             this.transform.Translate(new Vector3(horizontal,0,0)  * speed * Time.deltaTime);
+            playerIsMoving = true;
         }
         
         
