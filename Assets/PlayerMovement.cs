@@ -7,14 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody playerRB;
+    #region movement in inspector
+    
     [SerializeField] float speed = 1;
+    [SerializeField] float crouchSpeed = 2;
     [SerializeField] float horizontal;
     [SerializeField] float jumpForce= 10;
     [SerializeField] bool isGrounded;
-    [SerializeField] public bool playerIsMoving;
-    [SerializeField] FollowPlayer doggo;
+     public bool playerIsMoving;
     [SerializeField] bool isFrozen;
+    [SerializeField] float crouchHeight;
+    [SerializeField] float centerChange;
+    #endregion
+
+    [SerializeField] FollowPlayer doggo;
+    Rigidbody playerRB;
     RigidbodyConstraints originalConstraints;
 
     private void Awake()
@@ -31,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
+        //horizontal = Input.GetAxis("Horizontal");
        if (!isFrozen)
         {
             playerRB.constraints = originalConstraints;
@@ -48,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         }
         Movement();
         Jump();
+        Crouching();
     }
     public void Jump()
     {
@@ -56,25 +64,57 @@ public class PlayerMovement : MonoBehaviour
             playerRB.AddForce(Vector3.up *jumpForce, ForceMode.Impulse);
         }
     }
-    void Movement()
+    void Crouching()
     {
-      
-        if (Input.GetKey(KeyCode.A))
+        Vector3 capsuleColliderCenter = gameObject.GetComponent<CapsuleCollider>().center;
+
+        if (Input.GetKey(KeyCode.C))
         {
-           
-            //playerRB.AddForce(new Vector3(horizontal, 0, 0)*speed, ForceMode.Force);
-            this.transform.Translate(new Vector3(horizontal,0,0) * speed * Time.deltaTime);
-            playerIsMoving = true ;
+            speed = crouchSpeed;
+            gameObject.GetComponent<CapsuleCollider>().height = crouchHeight; // set collider height to crouch height
+
+            //animator.SetBool("IsCrouching", true); // start animation
+
+            if (gameObject.GetComponent<CapsuleCollider>().center.y > centerChange) // change the center of the collider to match crouch hitbox
+            {
+                gameObject.GetComponent<CapsuleCollider>().center = new Vector3(capsuleColliderCenter.x, capsuleColliderCenter.y + centerChange, capsuleColliderCenter.z);
+
+            }
         }
-        if (Input.GetKey(KeyCode.D))
+        else
         {
-            
-            //playerRB.AddForce(new Vector3(horizontal, 0, 0) * speed, ForceMode.Force);
-            this.transform.Translate(new Vector3(horizontal,0,0)  * speed * Time.deltaTime);
-            playerIsMoving = true;
+            gameObject.GetComponent<CapsuleCollider>().height = crouchHeight * 2;
+            gameObject.GetComponent<CapsuleCollider>().center = new Vector3(capsuleColliderCenter.x, 0f, capsuleColliderCenter.z);
+            speed = 5;
         }
-        
-        
+    }
+
+            void Movement()
+    {
+
+        //if (Input.GetKey(KeyCode.A))
+        //{
+
+        //    //playerRB.AddForce(new Vector3(horizontal, 0, 0)*speed, ForceMode.Force);
+        //    this.transform.Translate(new Vector3(horizontal,0,0) * speed * Time.deltaTime);
+        //    playerIsMoving = true ;
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+
+        //    //playerRB.AddForce(new Vector3(horizontal, 0, 0) * speed, ForceMode.Force);
+        //    this.transform.Translate(new Vector3(horizontal,0,0)  * speed * Time.deltaTime);
+        //    playerIsMoving = true;
+        //}
+        var horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        var direction = Vector3.right * horizontalInput;
+        direction *= Time.deltaTime;
+
+        transform.Translate(direction * speed);
+
+        playerIsMoving = horizontalInput != 0;
+
     }
     private void OnCollisionStay(Collision collision)
     {
