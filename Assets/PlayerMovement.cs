@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 
 
@@ -14,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool isGrounded;
     [SerializeField] public bool playerIsMoving;
     [SerializeField] FollowPlayer doggo;
-    
+    [SerializeField] bool isFrozen;
+    RigidbodyConstraints originalConstraints;
 
     private void Awake()
     {
@@ -22,11 +23,19 @@ public class PlayerMovement : MonoBehaviour
         doggo = FindObjectOfType<FollowPlayer>();
 
     }
+    private void Start()
+    {
+        originalConstraints = playerRB.constraints;
+        isFrozen = false;
+    }
 
     private void Update()
     {
         horizontal = Input.GetAxis("Horizontal");
-       
+       if (!isFrozen)
+        {
+            playerRB.constraints = originalConstraints;
+        }
         
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -74,5 +83,20 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         isGrounded = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Finish"))
+        {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        }
+    }
+    public void FreezeMovement()
+    {
+        isFrozen = true;
+        playerRB.constraints = RigidbodyConstraints.FreezePositionY;
+        playerRB.constraints = RigidbodyConstraints.FreezePositionX;
     }
 }

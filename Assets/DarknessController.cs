@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DarknessController : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class DarknessController : MonoBehaviour
     [SerializeField] float darknessSpeed;
     [SerializeField] public bool followingPlayer;
     FollowPlayer doggo;
-
+    [SerializeField] float distanceFromDoggo;
+    [SerializeField] float barkRange;
     private void Awake()
     {
         followingPlayer = false;
@@ -19,18 +21,38 @@ public class DarknessController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        distanceFromDoggo = Mathf.Abs(transform.position.x - doggo.transform.position.x);
+        
+        if (target.GetComponent<Rigidbody>().velocity != Vector3.zero&& distanceFromDoggo>barkRange )
         {
             followingPlayer = true;
         }
-        if (!doggo.isBarking&& followingPlayer)
+        if (distanceFromDoggo > barkRange && !doggo.isBarking)
+        {
+            followingPlayer = true;
+        }
+        if (distanceFromDoggo <= barkRange && doggo.isBarking)
+        {
+            followingPlayer = false;
+        }
+        if (followingPlayer)
         { 
             MoveTowardsPlayer();
         }
+        
         
     }
     public void MoveTowardsPlayer()
     {
       this.transform.Translate(Vector3.right*darknessSpeed*Time.deltaTime);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerMovement>().FreezeMovement();
+        }
+        // play animation for darkness grabbing the player
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

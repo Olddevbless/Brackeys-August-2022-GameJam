@@ -29,11 +29,11 @@ public class FollowPlayer : MonoBehaviour
         {
             Invoke("Follow", 1f);
         }
-        if (Mathf.Abs(target.transform.position.x - this.transform.position.x) > followDistance&& playerIsMoving)
+        if (Mathf.Abs(target.transform.position.x - this.transform.position.x) > followDistance&& playerIsMoving&& !isBarking)
         {
             isFollowing = true;
         }
-        if (Mathf.Abs(target.transform.position.x - this.transform.position.x) < followDistance)
+        if (Mathf.Abs(target.transform.position.x - this.transform.position.x) < followDistance&& !isBarking)
         {
             isFollowing = false;
         }
@@ -52,12 +52,13 @@ public class FollowPlayer : MonoBehaviour
     public void Stay()
     {
         isFollowing =false;
-        
+        nav.destination = transform.position;
         isBarking = true;
 
     }
     public void ComeHere()
     {
         isFollowing = true;
+        isBarking = false;
     }
 }
