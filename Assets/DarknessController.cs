@@ -44,7 +44,7 @@ public class DarknessController : MonoBehaviour
     }
     public void MoveTowardsPlayer()
     {
-      this.transform.Translate(Vector3.right*darknessSpeed*Time.deltaTime);
+      transform.Translate(Vector3.right*darknessSpeed*Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {
