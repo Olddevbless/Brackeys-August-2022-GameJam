@@ -18,8 +18,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool isFrozen;
     [SerializeField] float crouchHeight;
     [SerializeField] float centerChange;
+    [SerializeField] float gravity = -9.81f; // test
     #endregion
 
+    [SerializeField] bool grabBoulder;
     [SerializeField] FollowPlayer doggo;
     Rigidbody playerRB;
     RigidbodyConstraints originalConstraints;
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         Movement();
         Jump();
         Crouching();
+        ApplyGravity();
     }
     public void Jump()
     {
@@ -131,6 +134,36 @@ public class PlayerMovement : MonoBehaviour
         {
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        }
+        
+    }
+    public void ApplyGravity()
+    {
+        playerRB.velocity += Vector3.down * gravity * Time.deltaTime;
+        
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //if (other.CompareTag ("Note"))
+            //{
+            //   other.GetComponent<Note>().ReadNote();
+            //}
+            if (other.CompareTag("Boulder"))
+            {
+                grabBoulder = !grabBoulder;
+                
+                if (grabBoulder)
+                {
+                    other.GetComponent<HingeJoint>().connectedBody = playerRB;
+                }
+                if (!grabBoulder)
+                {
+                    other.GetComponent<HingeJoint>().connectedBody = null;
+                }
+                    
+            }
         }
     }
     public void FreezeMovement()
