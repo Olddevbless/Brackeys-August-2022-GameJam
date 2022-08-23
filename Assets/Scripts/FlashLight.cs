@@ -38,7 +38,7 @@ public class FlashLight : MonoBehaviour
                 
             }
             lightEmission.intensity = currentBatteryLife;
-            if (currentBatteryLife == 0)
+            if (currentBatteryLife <= 0)
             {
                 ToggleLight();
                 
@@ -56,6 +56,7 @@ public class FlashLight : MonoBehaviour
             }
             lightEmission.intensity = 0;
         }
+        
     }
     
     public void ToggleLight()

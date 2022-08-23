@@ -787,14 +787,6 @@
       <Project>{8C38B7FB-70C5-8253-3C38-BB17EFB0BAED}</Project>
       <Name>NavMeshComponentsEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsExamplesEditor.csproj">
-      <Project>{65A55ABF-D0F7-A1E1-AF8F-F4750D932714}</Project>
-      <Name>NavMeshComponentsExamplesEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsExamples.csproj">
-      <Project>{1C448629-B112-4426-D18E-AF9103720870}</Project>
-      <Name>NavMeshComponentsExamples</Name>
-    </ProjectReference>
     <ProjectReference Include="NavMeshComponents.csproj">
       <Project>{1F15C8AF-5BA6-6DA1-B9B8-222787964F36}</Project>
       <Name>NavMeshComponents</Name>

@@ -31,9 +31,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool noteReading;
     public bool isDead;
     [Header("Climbing")]
-    [SerializeField] bool onWall;
-    [SerializeField] bool onRightWall;
-    [SerializeField] bool onLeftWall;
+    //[SerializeField] bool onWall;
+    //[SerializeField] bool onRightWall;
+    //[SerializeField] bool onLeftWall;
     
     [SerializeField] float rayHeightOffset;
     [SerializeField] float climbSpeed;
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
             doggo.Bark();
         }
         
-        if (onWall&&Input.GetKey(KeyCode.R))
+        if (OnAnyWall()&&Input.GetKey(KeyCode.R))
         {
             playerRB.useGravity = false;
             
@@ -172,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ApplyGravity()
     {
-        if (!onWall)
+        if (!OnAnyWall())
         {
             playerRB.velocity += Vector3.down * gravity * Time.deltaTime;
         }
@@ -217,11 +217,11 @@ public class PlayerMovement : MonoBehaviour
         
         
     }
-    private bool BotLeftRay() => RayCheck(Vector3.left, false);
-    private bool TopLeftRay() => RayCheck(Vector3.left, true);
-    private bool BotRightRay() => RayCheck(Vector3.right, false);
-    private bool TopRightRay() => RayCheck(Vector3.right, true);
-    private bool OnAnyWall() => BotLeftRay()||TopLeftRay()||BotRightRay()||TopRightRay();
+    [SerializeField] private bool BotLeftRay() => RayCheck(Vector3.left, false);
+    [SerializeField] private bool TopLeftRay() => RayCheck(Vector3.left, true);
+    [SerializeField] private bool BotRightRay() => RayCheck(Vector3.right, false);
+    [SerializeField] private bool TopRightRay() => RayCheck(Vector3.right, true);
+    [SerializeField] private bool OnAnyWall() => BotLeftRay()||TopLeftRay()||BotRightRay()||TopRightRay();
     public bool RayCheck(Vector3 dir, bool positive)
     {
         float offSetPos;
