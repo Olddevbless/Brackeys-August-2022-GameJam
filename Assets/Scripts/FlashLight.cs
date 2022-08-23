@@ -11,6 +11,7 @@ public class FlashLight : MonoBehaviour
     [SerializeField] GameObject lightCollider;
     [SerializeField] float lightColliderX;
     [SerializeField] float lightColliderScaleZ;
+
     void Start()
     {
         lightColliderX = lightCollider.transform.localPosition.z;
@@ -56,11 +57,13 @@ public class FlashLight : MonoBehaviour
             lightEmission.intensity = 0;
         }
     }
+    
     public void ToggleLight()
     {
         
         lightOn = !lightOn;
         lightCollider.SetActive(lightOn);
     }
+    
    
 }

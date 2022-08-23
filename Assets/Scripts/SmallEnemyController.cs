@@ -15,6 +15,8 @@ public class SmallEnemyController : MonoBehaviour
     [SerializeField][Range(1,4)] int attackOptions;
     [SerializeField]float attackRange;
     [SerializeField] float attackRadius;
+    [SerializeField] float scaredRadius;
+    
 
     void Start()
     {
@@ -100,5 +102,23 @@ public class SmallEnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRadius);
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
+        if (other.CompareTag("Light"))
+        {
+            
+            StartCoroutine(DeathByLight());
+        }
+    }
+    public IEnumerator DeathByLight()
+    {
+        //play death animation
+        Debug.Log("play death animation");
+        isAttacking = false;
+        isPositioning = false;
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
     }
 }

@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float centerChange;
     [SerializeField] float gravity = -9.81f; // test
     #endregion
-
+    GameManager gameManager;
     [SerializeField] bool grabBoulder;
     [SerializeField] FollowPlayer doggo;
     Rigidbody playerRB;
@@ -34,10 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool onWall;
     [SerializeField] bool onRightWall;
     [SerializeField] bool onLeftWall;
-    [SerializeField] bool onLeftWallLow;
-    [SerializeField] bool onLeftWallHigh;
-    [SerializeField] bool onRightWallLow;
-    [SerializeField] bool onRightWallHigh;
+    
     [SerializeField] float rayHeightOffset;
     [SerializeField] float climbSpeed;
     
@@ -46,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
         flashLight = FindObjectOfType<FlashLight>();
         scalableWallsMask = (1 << layerID);
         playerRB = this.GetComponent<Rigidbody>();
@@ -96,13 +94,17 @@ public class PlayerMovement : MonoBehaviour
             ApplyGravity();
             playerRB.useGravity = true;
         }
+        if (Input.GetKeyDown(KeyCode.E)&& noteReading)
+        {
+            noteReading = false;
+        }
         if (noteReading)
         {
             Time.timeScale = 0;
         }
-        else
+        else if (!gameManager.pauseMenuIsActive)
         {
-            Time.timeScale = 1;
+            Time.timeScale =1;
         }
         OnWall();
         Movement();
@@ -168,24 +170,6 @@ public class PlayerMovement : MonoBehaviour
         playerIsMoving = horizontalInput != 0;
 
     }
-    private void OnCollisionStay(Collision collision)
-    {
-        isGrounded = true;
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        isGrounded = false;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Finish"))
-        {
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-        }
-        
-    }
     public void ApplyGravity()
     {
         if (!onWall)
@@ -194,33 +178,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (other.CompareTag ("Note"))
-            {
-                noteReading = !noteReading;
-               other.GetComponent<Note>().ReadNote();
-            }
-            if (other.CompareTag("Boulder"))
-            {
-                grabBoulder = !grabBoulder;
-                
-                if (grabBoulder)
-                {
-                    other.GetComponent<HingeJoint>().connectedBody = playerRB;
-                }
-                if (!grabBoulder)
-                {
-                    other.GetComponent<HingeJoint>().connectedBody = null;
-                }
-                    
-            }
-            
-        }
-        
-    }
+   
     public void FreezeMovement()
     {
         isFrozen = true;
@@ -238,77 +196,86 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnWall ()
     {
-        bool botLeftRay = Physics.Raycast(new Vector3(transform.position.x, transform.position.y - rayHeightOffset, transform.position.z), Vector3.left, 1f, scalableWallsMask);
-        bool topLeftRay = Physics.Raycast(new Vector3(transform.position.x, transform.position.y + rayHeightOffset, transform.position.z), Vector3.left, 1f, scalableWallsMask);
-        bool botRightRay = Physics.Raycast(new Vector3(transform.position.x, transform.position.y - rayHeightOffset, transform.position.z), Vector3.right, 1f, scalableWallsMask);
-        bool topRightRay = Physics.Raycast(new Vector3(transform.position.x, transform.position.y + rayHeightOffset, transform.position.z), Vector3.right, 1f, scalableWallsMask);
-        bool onWallBool = botLeftRay || botRightRay || topLeftRay || topRightRay; 
-        if (onWallBool) //checks if player is on the wall at all
+        if (!OnAnyWall())
+            return;
+        
+       if (Input.GetKey(KeyCode.W))
         {
-            onWall = true;
-        }
-        else
-        {
-            onWall = false;
-        }
-        bool onLeftWallBool = botLeftRay || topLeftRay; // checks if the player is on the left wall 
-        if (onLeftWallBool)
-        {
-            onLeftWall = true;
-        }
-        else
-        {
-            onLeftWall = false;
-        }
-        bool onRightWallBool = botRightRay || topRightRay; // checks if player is on the right wall
-        if (onRightWallBool)
-        {
-            onRightWall = true;
-        }
-        else
-        {
-            onRightWall = false;
-        }
-        if (botLeftRay) // checks if the bottom left of the player is touching a wall (pull up animation)
-        {
-            onLeftWallLow = true;
-        }
-        else
-        {
-            onLeftWallLow = false;
-        }
-        if (botRightRay) // checks if the bottom right of the player is touching a wall (pull up animation)
-        {   
-            onRightWallLow = true;
-        }
-        else
-        {    
-            onRightWallLow = false;
-        }
-        if (topLeftRay) // checks if the top left of the player is touching a wall (hang animation)
-        {     
-            onLeftWallHigh = true;
-        }
-        else
-        {           
-            onLeftWallHigh = false;
-        }
-        if (topRightRay) // checks if the top right of the player is touching a wall (hang animation)
-        {            
-            onRightWallHigh = true;
-        }
-        else
-        {
-            onRightWallHigh = false;
-        }
-       if (onWall&&Input.GetKey(KeyCode.W))
-        {
+            //play climb up animation
+            //left/right wall animation
+            //high or low animation
             transform.Translate(Vector3.up * climbSpeed * Time.deltaTime);
         }
-       if (onWall&&Input.GetKey(KeyCode.S))
+       if (Input.GetKey(KeyCode.S))
         {
+            // play slide down animation
+            // left/right wall animation
+            // high or low animation
             transform.Translate(Vector3.down * climbSpeed * Time.deltaTime);
         }
+
+        
+        
+    }
+    private bool BotLeftRay() => RayCheck(Vector3.left, false);
+    private bool TopLeftRay() => RayCheck(Vector3.left, true);
+    private bool BotRightRay() => RayCheck(Vector3.right, false);
+    private bool TopRightRay() => RayCheck(Vector3.right, true);
+    private bool OnAnyWall() => BotLeftRay()||TopLeftRay()||BotRightRay()||TopRightRay();
+    public bool RayCheck(Vector3 dir, bool positive)
+    {
+        float offSetPos;
+        if (positive)
+            offSetPos = transform.position.y + rayHeightOffset;
+        else
+            offSetPos = transform.position.y - rayHeightOffset;
+        return Physics.Raycast(new Vector3(transform.position.x, offSetPos, transform.position.z), dir, 1f, scalableWallsMask);
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        isGrounded = true;
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        isGrounded = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Finish"))
+        {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (other.CompareTag("Note"))
+            {
+                Debug.Log("reading" + other.gameObject.name);
+                noteReading = !noteReading;
+                other.GetComponent<Note>().ReadNote();
+            }
+            if (other.CompareTag("Boulder"))
+            {
+                grabBoulder = !grabBoulder;
+
+                if (grabBoulder)
+                {
+                    other.GetComponent<HingeJoint>().connectedBody = playerRB;
+                }
+                if (!grabBoulder)
+                {
+                    other.GetComponent<HingeJoint>().connectedBody = null;
+                }
+
+            }
+
+        }
+
     }
     private void OnDrawGizmos()
     {
