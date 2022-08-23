@@ -11,6 +11,7 @@ public class DarknessController : MonoBehaviour
     FollowPlayer doggo;
     [SerializeField] float distanceFromDoggo;
     [SerializeField] float barkRange;
+    [SerializeField] bool darknessInitiated;
     private void Awake()
     {
         followingPlayer = false;
@@ -22,12 +23,8 @@ public class DarknessController : MonoBehaviour
     void Update()
     {
         distanceFromDoggo = Mathf.Abs(transform.position.x - doggo.transform.position.x);
-        
-        if (target.GetComponent<Rigidbody>().velocity != Vector3.zero&& distanceFromDoggo>barkRange )
-        {
-            followingPlayer = true;
-        }
-        if (distanceFromDoggo > barkRange && !doggo.isBarking)
+
+        if (distanceFromDoggo > barkRange && !doggo.isBarking && darknessInitiated)
         {
             followingPlayer = true;
         }
@@ -44,15 +41,22 @@ public class DarknessController : MonoBehaviour
     }
     public void MoveTowardsPlayer()
     {
+        darknessInitiated = true;
       this.transform.Translate(Vector3.right*darknessSpeed*Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            followingPlayer = false;
             other.GetComponent<PlayerMovement>().FreezeMovement();
+            other.GetComponent<PlayerMovement>().isDead = true;
         }
         // play animation for darkness grabbing the player
+        Invoke("LoadNextLevel",2);
+    }
+    void LoadNextLevel()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Boulder
+  - Light
+  - Note
   layers:
   - Default
   - TransparentFX

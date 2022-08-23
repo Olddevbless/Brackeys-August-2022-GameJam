@@ -9,7 +9,9 @@ public class PlayerMovement : MonoBehaviour
 {
     #region movement in inspector
     
-    [SerializeField] float speed = 1;
+    public float speed = 1;
+    public bool isSlowed;
+    public float slow=1;
     [SerializeField] float crouchSpeed = 2;
     [SerializeField] float horizontal;
     [SerializeField] float jumpForce= 10;
@@ -25,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] FollowPlayer doggo;
     Rigidbody playerRB;
     RigidbodyConstraints originalConstraints;
+    [SerializeField] FlashLight flashLight;
+    [SerializeField] bool noteReading;
+    public bool isDead;
     [Header("Climbing")]
     [SerializeField] bool onWall;
     [SerializeField] bool onRightWall;
@@ -41,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        flashLight = FindObjectOfType<FlashLight>();
         scalableWallsMask = (1 << layerID);
         playerRB = this.GetComponent<Rigidbody>();
         doggo = FindObjectOfType<FollowPlayer>();
@@ -48,8 +54,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Start()
     {
+        slow = 1;
+        isSlowed = false;
         originalConstraints = playerRB.constraints;
         isFrozen = false;
+        isDead = false;
     }
 
     private void Update()
@@ -59,7 +68,10 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRB.constraints = originalConstraints;
         }
-        
+       if (Input.GetKeyDown(KeyCode.F))
+        {
+            flashLight.ToggleLight();
+        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             doggo.Stay();
@@ -73,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         {
             doggo.Bark();
         }
-        OnWall();
+        
         if (onWall&&Input.GetKey(KeyCode.R))
         {
             playerRB.useGravity = false;
@@ -84,6 +96,15 @@ public class PlayerMovement : MonoBehaviour
             ApplyGravity();
             playerRB.useGravity = true;
         }
+        if (noteReading)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+        OnWall();
         Movement();
         Jump();
         Crouching();
@@ -123,27 +144,26 @@ public class PlayerMovement : MonoBehaviour
 
             void Movement()
     {
+        if (isSlowed)
+        {
+            slow = 0.5f;
 
-        //if (Input.GetKey(KeyCode.A))
-        //{
-
-        //    //playerRB.AddForce(new Vector3(horizontal, 0, 0)*speed, ForceMode.Force);
-        //    this.transform.Translate(new Vector3(horizontal,0,0) * speed * Time.deltaTime);
-        //    playerIsMoving = true ;
-        //}
-        //if (Input.GetKey(KeyCode.D))
-        //{
-
-        //    //playerRB.AddForce(new Vector3(horizontal, 0, 0) * speed, ForceMode.Force);
-        //    this.transform.Translate(new Vector3(horizontal,0,0)  * speed * Time.deltaTime);
-        //    playerIsMoving = true;
-        //}
+          if (slow<1)
+            {
+                slow += 0.1f * Time.deltaTime;
+            }
+          if (slow>=1)
+            {
+                isSlowed = false;
+            }
+            
+        }
         var horizontalInput = Input.GetAxisRaw("Horizontal");
 
         var direction = Vector3.right * horizontalInput;
         direction *= Time.deltaTime;
 
-        transform.Translate(direction * speed);
+        transform.Translate(direction * speed*slow);
 
         playerIsMoving = horizontalInput != 0;
 
@@ -178,10 +198,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            //if (other.CompareTag ("Note"))
-            //{
-            //   other.GetComponent<Note>().ReadNote();
-            //}
+            if (other.CompareTag ("Note"))
+            {
+                noteReading = !noteReading;
+               other.GetComponent<Note>().ReadNote();
+            }
             if (other.CompareTag("Boulder"))
             {
                 grabBoulder = !grabBoulder;
@@ -196,13 +217,24 @@ public class PlayerMovement : MonoBehaviour
                 }
                     
             }
+            
         }
+        
     }
     public void FreezeMovement()
     {
         isFrozen = true;
         playerRB.constraints = RigidbodyConstraints.FreezePositionY;
         playerRB.constraints = RigidbodyConstraints.FreezePositionX;
+        if (!isDead)
+        {
+            Invoke("UnfreezeMovement", 2f);
+        }
+        
+    }
+    public void UnfreezeMovement()
+    {
+        isFrozen = false;
     }
     void OnWall ()
     {
@@ -286,4 +318,5 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawRay(new Vector3(transform.position.x, transform.position.y - rayHeightOffset, transform.position.z), Vector3.right);
         Gizmos.DrawRay(new Vector3(transform.position.x, transform.position.y + rayHeightOffset, transform.position.z), Vector3.right);
     }
+    
 }
