@@ -10,8 +10,8 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] float followDistance;
     [SerializeField] bool isFollowing;
     [SerializeField] bool playerIsMoving;
-    [SerializeField] public bool isBarking;
-    
+    public bool isBarking;
+    public bool isStaying;
     NavMeshAgent nav;
 
     void Start()
@@ -29,7 +29,7 @@ public class FollowPlayer : MonoBehaviour
         {
             Invoke("Follow", 1f);
         }
-        if (Mathf.Abs(target.transform.position.x - this.transform.position.x) > followDistance&& playerIsMoving&& !isBarking)
+        if (Mathf.Abs(target.transform.position.x - this.transform.position.x) > followDistance&& playerIsMoving&& !isStaying)
         {
             isFollowing = true;
         }
@@ -51,14 +51,30 @@ public class FollowPlayer : MonoBehaviour
     }
     public void Stay()
     {
+        Debug.Log("Staying");
         isFollowing =false;
         nav.destination = transform.position;
-        isBarking = true;
+        isStaying = true;
 
     }
     public void ComeHere()
     {
+        Debug.Log("coming!");
+        nav.destination = target.transform.position;
         isFollowing = true;
         isBarking = false;
+        isStaying = false;
+    }
+    public void Bark()
+    {
+        if (isStaying)
+        {
+            Debug.Log("Barking");
+            isBarking = true;
+        }
+        if (!isStaying)
+        {
+            Debug.Log("Buddy cannot bark, it is following");
+        }
     }
 }

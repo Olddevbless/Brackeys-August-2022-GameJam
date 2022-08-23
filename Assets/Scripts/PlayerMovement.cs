@@ -25,9 +25,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] FollowPlayer doggo;
     Rigidbody playerRB;
     RigidbodyConstraints originalConstraints;
+    [Header("Climbing")]
+    [SerializeField] bool onWall;
+    [SerializeField] bool onRightWall;
+    [SerializeField] bool onLeftWall;
+    [SerializeField] bool onLeftWallLow;
+    [SerializeField] bool onLeftWallHigh;
+    [SerializeField] bool onRightWallLow;
+    [SerializeField] bool onRightWallHigh;
+    [SerializeField] float rayHeightOffset;
+    [SerializeField] float climbSpeed;
+    
+    int layerID = 8;
+    LayerMask scalableWallsMask;
 
     private void Awake()
     {
+        scalableWallsMask = (1 << layerID);
         playerRB = this.GetComponent<Rigidbody>();
         doggo = FindObjectOfType<FollowPlayer>();
 
@@ -46,19 +60,34 @@ public class PlayerMovement : MonoBehaviour
             playerRB.constraints = originalConstraints;
         }
         
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             doggo.Stay();
             
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             doggo.ComeHere();
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            doggo.Bark();
+        }
+        OnWall();
+        if (onWall&&Input.GetKey(KeyCode.R))
+        {
+            playerRB.useGravity = false;
+            
+        }
+        else
+        {
+            ApplyGravity();
+            playerRB.useGravity = true;
         }
         Movement();
         Jump();
         Crouching();
-        ApplyGravity();
+        
     }
     public void Jump()
     {
@@ -139,8 +168,11 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ApplyGravity()
     {
-        playerRB.velocity += Vector3.down * gravity * Time.deltaTime;
-        
+        if (!onWall)
+        {
+            playerRB.velocity += Vector3.down * gravity * Time.deltaTime;
+        }
+
     }
     private void OnTriggerStay(Collider other)
     {
@@ -171,5 +203,87 @@ public class PlayerMovement : MonoBehaviour
         isFrozen = true;
         playerRB.constraints = RigidbodyConstraints.FreezePositionY;
         playerRB.constraints = RigidbodyConstraints.FreezePositionX;
+    }
+    void OnWall ()
+    {
+        bool botLeftRay = Physics.Raycast(new Vector3(transform.position.x, transform.position.y - rayHeightOffset, transform.position.z), Vector3.left, 1f, scalableWallsMask);
+        bool topLeftRay = Physics.Raycast(new Vector3(transform.position.x, transform.position.y + rayHeightOffset, transform.position.z), Vector3.left, 1f, scalableWallsMask);
+        bool botRightRay = Physics.Raycast(new Vector3(transform.position.x, transform.position.y - rayHeightOffset, transform.position.z), Vector3.right, 1f, scalableWallsMask);
+        bool topRightRay = Physics.Raycast(new Vector3(transform.position.x, transform.position.y + rayHeightOffset, transform.position.z), Vector3.right, 1f, scalableWallsMask);
+        bool onWallBool = botLeftRay || botRightRay || topLeftRay || topRightRay; 
+        if (onWallBool) //checks if player is on the wall at all
+        {
+            onWall = true;
+        }
+        else
+        {
+            onWall = false;
+        }
+        bool onLeftWallBool = botLeftRay || topLeftRay; // checks if the player is on the left wall 
+        if (onLeftWallBool)
+        {
+            onLeftWall = true;
+        }
+        else
+        {
+            onLeftWall = false;
+        }
+        bool onRightWallBool = botRightRay || topRightRay; // checks if player is on the right wall
+        if (onRightWallBool)
+        {
+            onRightWall = true;
+        }
+        else
+        {
+            onRightWall = false;
+        }
+        if (botLeftRay) // checks if the bottom left of the player is touching a wall (pull up animation)
+        {
+            onLeftWallLow = true;
+        }
+        else
+        {
+            onLeftWallLow = false;
+        }
+        if (botRightRay) // checks if the bottom right of the player is touching a wall (pull up animation)
+        {   
+            onRightWallLow = true;
+        }
+        else
+        {    
+            onRightWallLow = false;
+        }
+        if (topLeftRay) // checks if the top left of the player is touching a wall (hang animation)
+        {     
+            onLeftWallHigh = true;
+        }
+        else
+        {           
+            onLeftWallHigh = false;
+        }
+        if (topRightRay) // checks if the top right of the player is touching a wall (hang animation)
+        {            
+            onRightWallHigh = true;
+        }
+        else
+        {
+            onRightWallHigh = false;
+        }
+       if (onWall&&Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Vector3.up * climbSpeed * Time.deltaTime);
+        }
+       if (onWall&&Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.down * climbSpeed * Time.deltaTime);
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(new Vector3(transform.position.x, transform.position.y + rayHeightOffset, transform.position.z), Vector3.left);
+        Gizmos.DrawRay(new Vector3(transform.position.x, transform.position.y - rayHeightOffset, transform.position.z), Vector3.left);
+        Gizmos.DrawRay(new Vector3(transform.position.x, transform.position.y - rayHeightOffset, transform.position.z), Vector3.right);
+        Gizmos.DrawRay(new Vector3(transform.position.x, transform.position.y + rayHeightOffset, transform.position.z), Vector3.right);
     }
 }
