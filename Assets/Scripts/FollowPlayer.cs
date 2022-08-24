@@ -48,7 +48,7 @@ public class FollowPlayer : MonoBehaviour
     }
     void Follow()
     {
-        nav.destination = new Vector3(target.transform.position.x-followDistance,target.transform.position.y,target.transform.position.z);
+        nav.destination = new Vector3(target.transform.position.x-followDistance,target.transform.position.y+2,target.transform.position.z);
     }
     public void Stay()
     {
