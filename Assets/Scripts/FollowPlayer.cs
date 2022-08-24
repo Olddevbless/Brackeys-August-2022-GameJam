@@ -17,7 +17,7 @@ public class FollowPlayer : MonoBehaviour
     void Start()
     {
 
-       
+        target = GameObject.FindGameObjectWithTag("Player");
         nav = GetComponent<NavMeshAgent>();
     }
 

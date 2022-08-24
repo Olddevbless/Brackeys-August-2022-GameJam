@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxbatteryLife: 7
   currentBatteryLife: 0
-  lightOn: 1
+  lightOn: 0
   lightCollider: {fileID: 2335593824557271228}
   lightColliderX: 0
   lightColliderScaleZ: 0
@@ -227,7 +227,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350897779}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -385,20 +385,20 @@ MonoBehaviour:
   speed: 5
   isSlowed: 0
   slow: 1
-  crouchSpeed: 2
   horizontal: 1
-  jumpForce: 10
-  isGrounded: 0
   playerIsMoving: 0
   isFrozen: 0
+  gravity: 9.81
+  jumpForce: 10
+  isGrounded: 0
+  crouchSpeed: 2
   crouchHeight: 1
   centerChange: -0.5
-  gravity: 9.81
-  grabBoulder: 0
-  doggo: {fileID: 0}
   flashLight: {fileID: 0}
   noteReading: 0
   isDead: 0
+  grabBoulder: 0
+  doggo: {fileID: 0}
   rayHeightOffset: 0.82
   climbSpeed: 3
 --- !u!54 &3218063708790251144
@@ -508,7 +508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d4634e6b63eeb4f469d33431ac186fef, type: 3}
       propertyPath: m_Name
-      value: light cone
+      value: LightCone
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d4634e6b63eeb4f469d33431ac186fef, type: 3}
       propertyPath: m_TagString

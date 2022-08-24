@@ -7,6 +7,7 @@ TagManager:
   - Boulder
   - Light
   - Note
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - 
   - Climable Walls
   - NavMesh
-  - 
+  - Boulders
   - 
   - 
   - 

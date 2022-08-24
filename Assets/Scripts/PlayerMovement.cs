@@ -7,39 +7,49 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    #region movement in inspector
     
+    [Header("Movement")]
     public float speed = 1;
     public bool isSlowed;
     public float slow=1;
-    [SerializeField] float crouchSpeed = 2;
     [SerializeField] float horizontal;
-    [SerializeField] float jumpForce= 10;
-    [SerializeField] bool isGrounded;
      public bool playerIsMoving;
     [SerializeField] bool isFrozen;
+    RigidbodyConstraints originalConstraints;
+    Rigidbody playerRB;
+
+    [Header("Jumping")]
+    [SerializeField] float gravity = -9.81f; // test
+    [SerializeField] float jumpForce = 10;
+    [SerializeField] bool isGrounded;
+    
+   
+
+    [Header("Crouching")]
+
+    [SerializeField] float crouchSpeed = 2;
     [SerializeField] float crouchHeight;
     [SerializeField] float centerChange;
-    [SerializeField] float gravity = -9.81f; // test
-    #endregion
-    GameManager gameManager;
-    [SerializeField] bool grabBoulder;
-    [SerializeField] FollowPlayer doggo;
-    Rigidbody playerRB;
-    RigidbodyConstraints originalConstraints;
+    
+    
+    [Header("Interactions")]
+
     [SerializeField] FlashLight flashLight;
     [SerializeField] bool noteReading;
     public bool isDead;
+    GameManager gameManager;
+    [SerializeField] bool grabBoulder;
+    [SerializeField] FollowPlayer doggo;
+
     [Header("Climbing")]
     //[SerializeField] bool onWall;
     //[SerializeField] bool onRightWall;
     //[SerializeField] bool onLeftWall;
-    
     [SerializeField] float rayHeightOffset;
     [SerializeField] float climbSpeed;
-    
     int layerID = 8;
     LayerMask scalableWallsMask;
+
 
     private void Awake()
     {

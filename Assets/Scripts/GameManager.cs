@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public bool optionsPanelIsActive;
     void Awake()
     {
+        pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
+        optionsPanel = GameObject.Find("Options Panel");
+        pauseMenu = GameObject.Find("PauseMenu");
         if (instance != null)
         {
             Destroy(gameObject);
@@ -71,12 +74,15 @@ public class GameManager : MonoBehaviour
         bool mainMenuScene = true;
         pauseMenuIsActive = false;
         pauseMenu.SetActive(false);
-        while (mainMenuScene)
+        if (mainMenuScene)
         {
             pauseMenu.SetActive(false);
             //REMEMBER TO SET MAINMENUSCENE BOOL TO FALSE WHEN GAME STARTS
+
         }
-        
+
+
+
     }
    public void Options()
     {

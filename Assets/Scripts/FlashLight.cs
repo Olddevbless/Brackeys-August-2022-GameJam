@@ -18,6 +18,8 @@ public class FlashLight : MonoBehaviour
         lightColliderScaleZ = lightCollider.transform.localScale.z;
         lightEmission = gameObject.GetComponent<Light>();
         currentBatteryLife = maxbatteryLife;
+        lightCollider = GameObject.Find("LightCone");
+        lightCollider.SetActive(false);
     }
 
     // Update is called once per frame
