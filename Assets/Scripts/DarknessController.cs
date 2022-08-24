@@ -53,9 +53,9 @@ public class DarknessController : MonoBehaviour
             other.GetComponent<PlayerMovement>().isDead = true;
         }
         // play animation for darkness grabbing the player
-        Invoke("LoadNextLevel",2);
+        Invoke("ReloadLevel",2);
     }
-    void LoadNextLevel()
+    void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
