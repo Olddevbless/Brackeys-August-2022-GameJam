@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameManager instance;
     public GameObject pauseMenu;
     public bool pauseMenuIsActive;
+    public GameObject optionsPanel;
+    public bool optionsPanelIsActive;
     void Awake()
     {
         if (instance != null)
@@ -22,6 +25,8 @@ public class GameManager : MonoBehaviour
 
         pauseMenu.SetActive(false);
         pauseMenuIsActive = false;
+        optionsPanelIsActive = false;
+        optionsPanel.SetActive(false);
 
     }
 
@@ -50,5 +55,40 @@ public class GameManager : MonoBehaviour
             pauseMenu.SetActive(false);
         }
             
+    }
+   public void Quit()
+    {
+        Application.Quit();
+    }
+   public  void Resume()
+    {
+        pauseMenuIsActive = false;
+        pauseMenu.SetActive(false);
+    }
+  public  void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+        bool mainMenuScene = true;
+        pauseMenuIsActive = false;
+        pauseMenu.SetActive(false);
+        while (mainMenuScene)
+        {
+            pauseMenu.SetActive(false);
+            //REMEMBER TO SET MAINMENUSCENE BOOL TO FALSE WHEN GAME STARTS
+        }
+        
+    }
+   public void Options()
+    {
+        optionsPanelIsActive = !optionsPanelIsActive;
+        if (optionsPanelIsActive)
+        {
+            optionsPanel.SetActive(true);
+        }
+        else
+        {
+            optionsPanel.SetActive(false);
+        }
+
     }
 }
