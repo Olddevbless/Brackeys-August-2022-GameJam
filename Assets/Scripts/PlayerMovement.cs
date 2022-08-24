@@ -17,11 +17,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool isFrozen;
     RigidbodyConstraints originalConstraints;
     Rigidbody playerRB;
+    GameObject playerModel;
 
     [Header("Jumping")]
     [SerializeField] float gravity = -9.81f; // test
     [SerializeField] float jumpForce = 10;
     [SerializeField] bool isGrounded;
+    [SerializeField] float coyoteTime = 0.2f;
+    [SerializeField]  float coyoteTimeCounter;
+    [SerializeField] float jumpBufferTime = 0.2f;
+    [SerializeField]  float jumpBufferCounter;
     
    
 
@@ -53,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        playerModel = GameObject.Find("PlayerModel");
         gameManager = FindObjectOfType<GameManager>();
         flashLight = FindObjectOfType<FlashLight>();
         scalableWallsMask = (1 << layerID);
@@ -72,6 +78,24 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         //horizontal = Input.GetAxis("Horizontal");
+       if (isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+       else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+            
+        }
+       if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+            
+        }
        if (!isFrozen)
         {
             playerRB.constraints = originalConstraints;
@@ -124,9 +148,11 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space)&& isGrounded==true)
+        if (jumpBufferCounter>0 && coyoteTimeCounter>0)
         {
             playerRB.AddForce(Vector3.up *jumpForce, ForceMode.Impulse);
+            coyoteTimeCounter = 0;
+            jumpBufferCounter = 0;
         }
     }
     void Crouching()
@@ -178,6 +204,14 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(direction * speed*slow);
 
         playerIsMoving = horizontalInput != 0;
+        if (horizontalInput > 0)
+        {
+            playerModel.transform.rotation=Quaternion.Euler(new Vector3(0,0,0));
+        }
+        if (horizontalInput<0)
+        {
+            playerModel.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
 
     }
     public void ApplyGravity()
