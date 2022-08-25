@@ -6,6 +6,7 @@ using TMPro;
 public class Note : MonoBehaviour
 {
     [SerializeField]GameObject noteCanvas;
+    
     [SerializeField] bool canvasBool;
 
     private void Start()
