@@ -249,6 +249,8 @@ MonoBehaviour:
   centerChange: -0.5
   flashLight: {fileID: 0}
   noteReading: 0
+  notePrompt: 0
+  notePromptCanvas: {fileID: 0}
   isDead: 0
   grabBoulder: 0
   doggo: {fileID: 0}

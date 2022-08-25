@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] FlashLight flashLight;
     [SerializeField] bool noteReading;
+    [SerializeField] bool notePrompt;
+    [SerializeField] GameObject notePromptCanvas;
     public bool isDead;
     GameManager gameManager;
     [SerializeField] bool grabBoulder = true;
@@ -62,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        notePromptCanvas = GameObject.Find("NotePrompt");
         playerHands = transform.Find("PlayerHands");
         playerModel = GameObject.Find("PlayerModel");
         gameManager = FindObjectOfType<GameManager>();
@@ -96,17 +99,20 @@ public class PlayerMovement : MonoBehaviour
             }
             if (other.CompareTag("Note"))
             {
+                notePrompt = true;
                 noteTouch = other.gameObject;
             }
     }
     private void OnTriggerExit(Collider other)
     {
+        notePrompt = false;
         if (other.CompareTag("Boulder") && other.gameObject == touchObject)
         {
             touchObject = null;
         }
         if(other.CompareTag("Note") && other.gameObject == noteTouch)
         {
+            
             noteTouch = null;
         }
     }
@@ -200,6 +206,14 @@ public class PlayerMovement : MonoBehaviour
                 noteTouch = null;
             }
 
+        }
+        if (notePrompt)
+        {
+            notePromptCanvas.SetActive(true);
+        }
+        if (!notePrompt)
+        {
+            notePromptCanvas.SetActive(false);
         }
         
         OnWall();
