@@ -9,6 +9,7 @@ TagManager:
   - Note
   - PauseMenu
   - SmallEnemies
+  - Water
   layers:
   - Default
   - TransparentFX

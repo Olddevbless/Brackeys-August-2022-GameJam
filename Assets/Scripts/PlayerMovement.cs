@@ -376,6 +376,11 @@ public class PlayerMovement : MonoBehaviour
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+        if (other.CompareTag("Water"))
+        {
+            isDead = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
     }
    
