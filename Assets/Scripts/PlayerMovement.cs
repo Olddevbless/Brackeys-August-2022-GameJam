@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] FollowPlayer doggo;
     public bool isGrabable;
     private GameObject touchObject;
+    private GameObject noteTouch;
 
     [Header("Climbing")]
     //[SerializeField] bool onWall;
@@ -93,22 +94,20 @@ public class PlayerMovement : MonoBehaviour
                         grabBoulder = false;
                     }
             }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
             if (other.CompareTag("Note"))
             {
-                Debug.Log("reading" + other.gameObject.name);
-                noteReading = !noteReading;
-                other.GetComponent<Note>().ReadNote();
+                noteTouch = other.gameObject;
             }
-
-        }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Boulder") && other.gameObject == touchObject)
         {
             touchObject = null;
+        }
+        if(other.CompareTag("Note") && other.gameObject == noteTouch)
+        {
+            noteTouch = null;
         }
     }
     private void Update()
@@ -180,7 +179,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!grabBoulder)
             {
-                //isSlowed = false;
                 touchObject.transform.SetParent(null);
 
                 grabBoulder = false;
@@ -194,9 +192,14 @@ public class PlayerMovement : MonoBehaviour
                 touchObject.transform.SetParent(playerHands);
             }
 
-            /*grabBoulder = false;
-            isSlowed = false;
-            playerHands.DetachChildren();*/
+            if(noteTouch!=null)
+            {
+                Debug.Log("reading" + noteTouch.gameObject.name);
+                noteReading = !noteReading;
+                noteTouch.GetComponent<Note>().ReadNote();
+                noteTouch = null;
+            }
+
         }
         
         OnWall();
