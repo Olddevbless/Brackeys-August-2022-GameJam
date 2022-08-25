@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4809992111677234637}
   - component: {fileID: 4809992111677234636}
   - component: {fileID: 4809992111677234639}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: SmallEnemy
-  m_TagString: Untagged
+  m_TagString: SmallEnemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,3 +119,4 @@ MonoBehaviour:
   attackRange: 3
   attackRadius: 6
   scaredRadius: 0
+  enemyMode: 0

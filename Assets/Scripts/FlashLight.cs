@@ -67,6 +67,10 @@ public class FlashLight : MonoBehaviour
         lightOn = !lightOn;
         lightCollider.SetActive(lightOn);
     }
-    
-   
+     //void OnTriggerEnter(Collider other)
+    //{
+       // if (other.CompareTag(""))
+    //}
+
+
 }

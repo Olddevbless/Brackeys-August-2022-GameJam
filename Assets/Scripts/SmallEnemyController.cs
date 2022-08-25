@@ -24,7 +24,8 @@ public class SmallEnemyController : MonoBehaviour
         Idle,
         MoveTowardsPosition,
         MoveTowardsPlayer,
-        Attack
+        Attack,
+        Scared
     }
     public smallEnemyFSM enemyMode;
 
@@ -43,18 +44,25 @@ public class SmallEnemyController : MonoBehaviour
         {
             enemyMode = smallEnemyFSM.Idle;
         }
-        if (Vector3.Distance(this.transform.position, player.transform.position) < detectionRadius)
+        if (Vector3.Distance(this.transform.position, player.transform.position) < detectionRadius&& !isAttacking)
         {
             enemyMode = smallEnemyFSM.MoveTowardsPosition;
         }
-        if (Vector3.Distance(target.transform.position, player.transform.position) < attackRadius)
+        if (Vector3.Distance(target.transform.position, player.transform.position) < attackRadius&& !isPositioning)
         {
             enemyMode = smallEnemyFSM.MoveTowardsPlayer;
         }
-        if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
+        if (Vector3.Distance(transform.position, player.transform.position) < attackRange )
         {
             enemyMode = smallEnemyFSM.Attack;
         }
+        if (Vector3.Distance(transform.position, doggo.transform.position)< scaredRadius&& doggo.GetComponent<FollowPlayer>().isBarking)
+        {
+            enemyMode = smallEnemyFSM.Scared;
+        }
+        
+        
+            
         switch (enemyMode)
         {
             case smallEnemyFSM.Idle:
@@ -62,10 +70,12 @@ public class SmallEnemyController : MonoBehaviour
             case smallEnemyFSM.MoveTowardsPosition:
                 this.transform.rotation = Quaternion.LookRotation(target.transform.position - this.transform.position);
                 this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                isPositioning = false;
                 break;
             case smallEnemyFSM.MoveTowardsPlayer:
                 this.transform.rotation = Quaternion.LookRotation(player.transform.position - this.transform.position);
                 this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                isAttacking = true;
                 break;
             case smallEnemyFSM.Attack:
 
@@ -82,44 +92,58 @@ public class SmallEnemyController : MonoBehaviour
                     Invoke("DisableFlashLight", 1.5f);
                 }
                 break;
+            case smallEnemyFSM.Scared:
+                Scared();
+                break;
+            
         }
+  
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
+        if (other.CompareTag("Light"))
+        {
 
-        void DestroyPlayer()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(DeathByLight());
         }
-        void SlowPlayer()
-        {
-            player.GetComponent<PlayerMovement>().isSlowed = true;
-        }
-        void DisableFlashlight()
-        {
-            player.GetComponentInChildren<FlashLight>().currentBatteryLife = -3;
-        }
+    }
+    IEnumerator DeathByLight()
+    {
+        //play death animation
+        Debug.Log("play death animation");
+        //isAttacking = false;
+        //isPositioning = false;
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
+    void DestroyPlayer()
+    {
+        player.GetComponent<PlayerMovement>().isDead = true;
+        player.GetComponent<PlayerMovement>().FreezeMovement();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    void SlowPlayer()
+    {
+        player.GetComponent<PlayerMovement>().isSlowed = true;
+    }
+    void DisableFlashlight()
+    {
+        player.GetComponentInChildren<FlashLight>().currentBatteryLife = -3;
+    }
 
-        void OnDrawGizmos()
-        {
-            Gizmos.DrawWireSphere(transform.position, attackRadius);
-            Gizmos.DrawWireSphere(transform.position, detectionRadius);
-            Gizmos.DrawWireSphere(transform.position, attackRange);
-        }
-        void OnTriggerEnter(Collider other)
-        {
-            Debug.Log(other.gameObject.name);
-            if (other.CompareTag("Light"))
-            {
-
-                StartCoroutine(DeathByLight());
-            }
-        }
-        IEnumerator DeathByLight()
-        {
-            //play death animation
-            Debug.Log("play death animation");
-            //isAttacking = false;
-            //isPositioning = false;
-            yield return new WaitForSeconds(1.5f);
-            Destroy(gameObject);
-        }
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    void Scared()
+    {
+        Debug.Log("Scared");
+        this.transform.position = this.transform.position;
+        //play scared animation
+        if (!doggo.GetComponent<FollowPlayer>().isBarking)
+            return;
     }
 }
