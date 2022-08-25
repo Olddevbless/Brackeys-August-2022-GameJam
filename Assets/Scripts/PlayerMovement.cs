@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool grabBoulder;
     Transform playerHands;
     [SerializeField] FollowPlayer doggo;
+    public bool isGrabable;
 
     [Header("Climbing")]
     //[SerializeField] bool onWall;
@@ -142,6 +143,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Time.timeScale =1;
         }
+        if (Input.GetKeyDown(KeyCode.E)&& grabBoulder)
+        {
+            grabBoulder = false;
+            isSlowed = false;
+            playerHands.DetachChildren();
+        }
+        
         OnWall();
         Movement();
         Jump();
@@ -188,15 +196,16 @@ public class PlayerMovement : MonoBehaviour
         {
             slow = 0.5f;
 
-          if (slow<1)
-            {
-                slow += 0.1f * Time.deltaTime;
-            }
+          
           if (slow>=1)
             {
                 isSlowed = false;
             }
             
+        }
+        if (slow < 1)
+        {
+            slow += 0.1f * Time.deltaTime;
         }
         var horizontalInput = Input.GetAxisRaw("Horizontal");
 
@@ -297,6 +306,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+          isGrabable = true;
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (other.CompareTag("Note"))
@@ -307,8 +317,8 @@ public class PlayerMovement : MonoBehaviour
             }
             if (other.CompareTag("Boulder"))
             {
-                grabBoulder = !grabBoulder;
-
+                grabBoulder = true ;
+                
                 if (grabBoulder)
                 {
                     isSlowed = true;
