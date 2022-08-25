@@ -13,10 +13,11 @@ public class FollowPlayer : MonoBehaviour
     public bool isBarking;
     public bool isStaying;
     NavMeshAgent nav;
+    [SerializeField] bool isIdle;
 
     void Start()
     {
-
+        isIdle = false;
         target = GameObject.FindGameObjectWithTag("Player");
         nav = GetComponent<NavMeshAgent>();
     }
@@ -24,23 +25,31 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerIsMoving = target.GetComponent<PlayerMovement>().playerIsMoving;
-        if (isFollowing == true && playerIsMoving == true)
+        if (nav.isActiveAndEnabled == false)
         {
-            Invoke("Follow", 1f);
+            isIdle = true;
         }
-        if (Mathf.Abs(target.transform.position.x - this.transform.position.x) > followDistance&& playerIsMoving&& !isStaying)
+        if (isIdle == false)
         {
-            isFollowing = true;
+            playerIsMoving = target.GetComponent<PlayerMovement>().playerIsMoving;
+            if (isFollowing == true && playerIsMoving == true)
+            {
+                Invoke("Follow", 1f);
+            }
+            if (Mathf.Abs(target.transform.position.x - this.transform.position.x) > followDistance && playerIsMoving && !isStaying)
+            {
+                isFollowing = true;
+            }
+            if (Mathf.Abs(target.transform.position.x - this.transform.position.x) < followDistance && !isBarking)
+            {
+                isFollowing = false;
+            }
+            if (isFollowing)
+            {
+                isBarking = false;
+            }
         }
-        if (Mathf.Abs(target.transform.position.x - this.transform.position.x) < followDistance&& !isBarking)
-        {
-            isFollowing = false;
-        }
-        if (isFollowing)
-        {
-            isBarking = false;
-        }
+       
         
         
         

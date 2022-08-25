@@ -12,6 +12,7 @@ public class DarknessController : MonoBehaviour
     [SerializeField] float distanceFromDoggo;
     [SerializeField] float barkRange;
     [SerializeField] bool darknessInitiated;
+    Vector3 offSet = new Vector3(0f, -5f, 0f);
     private void Awake()
     {
         followingPlayer = false;
@@ -22,6 +23,11 @@ public class DarknessController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!darknessInitiated)
+        {
+            this.GetComponent<BoxCollider>().enabled = false;
+            this.GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
         distanceFromDoggo = Mathf.Abs(transform.position.x - doggo.transform.position.x);
 
         if (distanceFromDoggo > barkRange && !doggo.isBarking && darknessInitiated)
@@ -41,8 +47,10 @@ public class DarknessController : MonoBehaviour
     }
     public void MoveTowardsPlayer()
     {
+        this.GetComponent<BoxCollider>().enabled = true;
+        this.GetComponentInChildren<MeshRenderer>().enabled = true;
         darknessInitiated = true;
-      this.transform.Translate(Vector3.right*darknessSpeed*Time.deltaTime);
+      this.transform.position = (Vector3.MoveTowards(transform.position,target.transform.position+offSet,1*darknessSpeed*Time.deltaTime));
     }
     private void OnTriggerEnter(Collider other)
     {

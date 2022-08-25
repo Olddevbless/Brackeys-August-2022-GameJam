@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public bool pauseMenuIsActive;
     public GameObject optionsPanel;
     public bool optionsPanelIsActive;
+    bool mainMenuScene;
     void Awake()
     {
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
@@ -36,11 +37,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu"))
+        {
+            mainMenuScene = true;
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            mainMenuScene = false;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseMenu();
         }
-            
+        
     }
    void PauseMenu()
     {
@@ -68,10 +78,10 @@ public class GameManager : MonoBehaviour
         pauseMenuIsActive = false;
         pauseMenu.SetActive(false);
     }
-  public  void MainMenu()
+  public  void LoadMainMenu()
     {
         SceneManager.LoadScene(0);
-        bool mainMenuScene = true;
+        mainMenuScene = true;
         pauseMenuIsActive = false;
         pauseMenu.SetActive(false);
         if (mainMenuScene)
@@ -80,9 +90,15 @@ public class GameManager : MonoBehaviour
             //REMEMBER TO SET MAINMENUSCENE BOOL TO FALSE WHEN GAME STARTS
 
         }
+        
+        
 
 
 
+    }
+   public void StartGame()
+    {
+        SceneManager.LoadScene(1);
     }
    public void Options()
     {
