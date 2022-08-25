@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isDead;
     GameManager gameManager;
     [SerializeField] bool grabBoulder;
+    Transform playerHands;
     [SerializeField] FollowPlayer doggo;
 
     [Header("Climbing")]
@@ -58,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        playerHands = transform.Find("PlayerHands");
         playerModel = GameObject.Find("PlayerModel");
         gameManager = FindObjectOfType<GameManager>();
         flashLight = FindObjectOfType<FlashLight>();
@@ -148,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump()
     {
-        if (jumpBufferCounter>0 && coyoteTimeCounter>0)
+        if (jumpBufferCounter>0 && coyoteTimeCounter>0&& !grabBoulder)
         {
             playerRB.AddForce(Vector3.up *jumpForce, ForceMode.Impulse);
             coyoteTimeCounter = 0;
@@ -309,11 +311,13 @@ public class PlayerMovement : MonoBehaviour
 
                 if (grabBoulder)
                 {
-                    other.GetComponent<HingeJoint>().connectedBody = playerRB;
+                    isSlowed = true;
+                    other.transform.SetParent(playerHands);
                 }
                 if (!grabBoulder)
                 {
-                    other.GetComponent<HingeJoint>().connectedBody = null;
+                    isSlowed = false;
+                    other.transform.SetParent(null);
                 }
 
             }
