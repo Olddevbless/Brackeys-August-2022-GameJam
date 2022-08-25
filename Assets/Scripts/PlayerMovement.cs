@@ -162,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
         if (OnAnyWall()&&Input.GetKey(KeyCode.R))
         {
             playerRB.useGravity = false;
+
             
         }
         else
@@ -293,6 +294,10 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ApplyGravity()
     {
+        if (OnAnyWall())
+        {
+            return;
+        }
         if (!OnAnyWall())
         {
             playerRB.velocity += Vector3.down * gravity * Time.deltaTime;
@@ -303,8 +308,8 @@ public class PlayerMovement : MonoBehaviour
     public void FreezeMovement()
     {
         isFrozen = true;
-        playerRB.constraints = RigidbodyConstraints.FreezePositionY;
-        playerRB.constraints = RigidbodyConstraints.FreezePositionX;
+        playerRB.constraints = RigidbodyConstraints.FreezeAll;
+        
         if (!isDead)
         {
             Invoke("UnfreezeMovement", 2f);
@@ -314,11 +319,14 @@ public class PlayerMovement : MonoBehaviour
     public void UnfreezeMovement()
     {
         isFrozen = false;
+        playerRB.constraints = originalConstraints;
     }
     void OnWall ()
     {
         if (!OnAnyWall())
             return;
+        FreezeMovement();
+        UnfreezeMovement();
         
        if (Input.GetKey(KeyCode.W))
         {
