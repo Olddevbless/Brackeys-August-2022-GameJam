@@ -2220,6 +2220,72 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 301559500, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1074
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_text
+      value: "Dan Kepler \u2013 3.10.1993\r\nJohn Mallory \u2013 5.20.2000\r\t\nFirst
+        day was a success, mostly. \r\nIt is interesting, how isolated one feels
+        among others, yet here in the wild, it feels\u2026 cramped. Something about
+        this place\u2026 it makes me feel different, I can\u2019t put my finger on
+        it, but I think the trail is wishing me luck.\r\nIt also feels familiar,
+        as if I\u2019ve been here before. In a sense, I have, this is the reason
+        I came here.\r\nIf I want to break free, I must see this through\r.\n\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontSize
+      value: 4.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.w
+      value: -26.217762
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.x
+      value: 42.80432
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.y
+      value: -19.591097
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.z
+      value: 42.18643
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0062d4cec65d5d74cbbae6cb3fa89b0a, type: 2}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.11743502
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.11743502
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.122641504
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 4.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4227056922390329674, guid: 0062d4cec65d5d74cbbae6cb3fa89b0a, type: 2}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280163871
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4002518108670658921, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
       propertyPath: m_RootOrder
       value: 2

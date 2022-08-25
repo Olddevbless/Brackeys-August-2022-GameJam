@@ -1004,6 +1004,71 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_text
+      value: "Arthur Monte \u2013 3.1.1992\r\nJohn Earhart \u2013 5.24.2000\r\n\u201CI
+        don\u2019t want to do this anymore. I don\u2019t want to fall on these rocks,
+        I don\u2019t want to walk in this mud, I don\u2019t want to reach this peak.
+        \r\nI don\u2019t want to go home, to be a stranger, damaged. I just want
+        to be alone.\r\nThis place never leaves you alone.\r\n\t\n\t\tI don\u2019t
+        think I can go back\u201D\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontSize
+      value: 4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.w
+      value: -25.131214
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.x
+      value: 43.376175
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.y
+      value: -18.704268
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.z
+      value: 42.917786
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0062d4cec65d5d74cbbae6cb3fa89b0a, type: 2}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4227056922390329674, guid: 0062d4cec65d5d74cbbae6cb3fa89b0a, type: 2}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4002518108670658921, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
       propertyPath: m_RootOrder
       value: 4

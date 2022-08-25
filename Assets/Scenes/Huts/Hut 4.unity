@@ -1481,6 +1481,65 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_text
+      value: "Rachel Cook \u2013 3.3.1989\r\nJohn Bishop \u2013 5.25.2000\r\n\u201CI
+        can\u2019t go on. I can\u2019t deal with this anymore\u2026 Why did this
+        have to happen to me? Out of all the fucking things that could happen. So
+        what if dad is gone? So what if I fail at all I do? If I disappoint everyone
+        who has ever loved me?\r\nThis fucking place, it\u2019s taunting me, I can
+        feel the disappointment, contempt\u2026 It\u2019s pitying me... it thinks
+        that its better for me to just disappear.\r\nI don\u2019t think I\u2019ll
+        make it out of here.\u201D}\r\n\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontSize
+      value: 4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.w
+      value: -24.628922
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.x
+      value: 43.017746
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_margin.z
+      value: 43.612137
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0062d4cec65d5d74cbbae6cb3fa89b0a, type: 2}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4227056922390329674, guid: 0062d4cec65d5d74cbbae6cb3fa89b0a, type: 2}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 301559501, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4002518108670658921, guid: f6a05af62b9bf0240bf2a26154c5c315, type: 3}
       propertyPath: m_RootOrder
       value: 4
