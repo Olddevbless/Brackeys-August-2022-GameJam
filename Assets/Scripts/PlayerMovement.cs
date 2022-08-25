@@ -43,10 +43,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool noteReading;
     public bool isDead;
     GameManager gameManager;
-    [SerializeField] bool grabBoulder;
+    [SerializeField] bool grabBoulder = true;
     Transform playerHands;
     [SerializeField] FollowPlayer doggo;
     public bool isGrabable;
+    private GameObject touchObject;
 
     [Header("Climbing")]
     //[SerializeField] bool onWall;
@@ -77,7 +78,39 @@ public class PlayerMovement : MonoBehaviour
         isFrozen = false;
         isDead = false;
     }
+    private void OnTriggerStay(Collider other)
+    {
+            isGrabable = true;
+            if (other.CompareTag("Boulder") )
+            {                    
+                    if(playerHands.childCount == 0)
+                    {
+                        grabBoulder = true;
+                        touchObject = other.gameObject;
+                    }
+                    else
+                    {
+                        grabBoulder = false;
+                    }
+            }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (other.CompareTag("Note"))
+            {
+                Debug.Log("reading" + other.gameObject.name);
+                noteReading = !noteReading;
+                other.GetComponent<Note>().ReadNote();
+            }
 
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Boulder") && other.gameObject == touchObject)
+        {
+            touchObject = null;
+        }
+    }
     private void Update()
     {
         //horizontal = Input.GetAxis("Horizontal");
@@ -143,11 +176,27 @@ public class PlayerMovement : MonoBehaviour
         {
             Time.timeScale =1;
         }
-        if (Input.GetKeyDown(KeyCode.E)&& grabBoulder)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            grabBoulder = false;
+            if (!grabBoulder)
+            {
+                //isSlowed = false;
+                touchObject.transform.SetParent(null);
+
+                grabBoulder = false;
+                isSlowed = false;
+                playerHands.DetachChildren();
+
+            }
+            if (grabBoulder)
+            {
+                isSlowed = true;
+                touchObject.transform.SetParent(playerHands);
+            }
+
+            /*grabBoulder = false;
             isSlowed = false;
-            playerHands.DetachChildren();
+            playerHands.DetachChildren();*/
         }
         
         OnWall();
@@ -158,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump()
     {
-        if (jumpBufferCounter>0 && coyoteTimeCounter>0&& !grabBoulder)
+        if (jumpBufferCounter>0 && coyoteTimeCounter>0&& playerHands.transform.childCount == 0)
         {
             playerRB.AddForce(Vector3.up *jumpForce, ForceMode.Impulse);
             coyoteTimeCounter = 0;
@@ -304,37 +353,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-    private void OnTriggerStay(Collider other)
-    {
-          isGrabable = true;
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (other.CompareTag("Note"))
-            {
-                Debug.Log("reading" + other.gameObject.name);
-                noteReading = !noteReading;
-                other.GetComponent<Note>().ReadNote();
-            }
-            if (other.CompareTag("Boulder"))
-            {
-                grabBoulder = true ;
-                
-                if (grabBoulder)
-                {
-                    isSlowed = true;
-                    other.transform.SetParent(playerHands);
-                }
-                if (!grabBoulder)
-                {
-                    isSlowed = false;
-                    other.transform.SetParent(null);
-                }
-
-            }
-
-        }
-
-    }
+   
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
