@@ -183,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!grabBoulder)
+            if (!grabBoulder && playerHands.transform.childCount !=0)
             {
                 touchObject.transform.SetParent(null);
 
