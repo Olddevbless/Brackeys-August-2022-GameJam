@@ -17710,6 +17710,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 741130097563773853, guid: b4ba9467107234d4786c1bbfc5793183, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 741130097563773853, guid: b4ba9467107234d4786c1bbfc5793183, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 0ea1d56d535f0554d808164d28ecb460, type: 3}
@@ -17724,7 +17728,7 @@ PrefabInstance:
     - target: {fileID: 789353771261628900, guid: b4ba9467107234d4786c1bbfc5793183, type: 3}
       propertyPath: walkingSurfaceSFX
       value: 
-      objectReference: {fileID: 8300000, guid: 0ea1d56d535f0554d808164d28ecb460, type: 3}
+      objectReference: {fileID: 8300000, guid: c391681adadfb654f90ccebf4ec19814, type: 3}
     - target: {fileID: 789353771261628901, guid: b4ba9467107234d4786c1bbfc5793183, type: 3}
       propertyPath: m_RootOrder
       value: 6
