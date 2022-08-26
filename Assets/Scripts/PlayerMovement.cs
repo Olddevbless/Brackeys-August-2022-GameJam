@@ -61,9 +61,17 @@ public class PlayerMovement : MonoBehaviour
     int layerID = 8;
     LayerMask scalableWallsMask;
 
+    [Header("SFX")]
+    [SerializeField] AudioSource playerAudio;
+    [SerializeField] AudioClip walkingSurfaceSFX;
+    
+    
+
+
 
     private void Awake()
     {
+        playerAudio = this.GetComponent<AudioSource>();
         notePromptCanvas = GameObject.Find("NotePrompt");
         playerHands = transform.Find("PlayerHands");
         playerModel = GameObject.Find("PlayerModel");
@@ -282,6 +290,9 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(direction * speed*slow);
 
         playerIsMoving = horizontalInput != 0;
+        
+        
+        
         if (horizontalInput > 0)
         {
             playerModel.transform.rotation=Quaternion.Euler(new Vector3(0,0,0));
