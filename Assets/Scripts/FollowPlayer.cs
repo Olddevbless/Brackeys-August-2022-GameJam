@@ -25,11 +25,11 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!nav.isActiveAndEnabled)
+        if (nav.isActiveAndEnabled == false)
         {
             isIdle = true;
         }
-        if (!isIdle)
+        if (isIdle == false)
         {
             playerIsMoving = target.GetComponent<PlayerMovement>().playerIsMoving;
             if (isFollowing == true && playerIsMoving == true)
@@ -49,15 +49,23 @@ public class FollowPlayer : MonoBehaviour
                 isBarking = false;
             }
         }
+       
+        
+        
+        
+       
     }
     void Follow()
     {
         nav.destination = new Vector3(target.transform.position.x-followDistance,target.transform.position.y+2,target.transform.position.z);
+<<<<<<< HEAD
 
         // example of how to play sounds.
         // the "Walk" sound is registered on the SoundRegistry object (inspector).
         // just use SoundManager.Play(ID)
         SoundManager.PlaySound("");
+=======
+>>>>>>> parent of e180386 (Merge branch 'main' of https://github.com/Olddevbless/Brackeys-August-2022-GameJam)
     }
     public void Stay()
     {

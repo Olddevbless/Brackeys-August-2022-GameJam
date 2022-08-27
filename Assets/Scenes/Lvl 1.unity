@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5053,81 +5053,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4ba9467107234d4786c1bbfc5793183, type: 3}
---- !u!1001 &3101383440876657203
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3101383441035492442, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: walkSound.identifier
-      value: Walk
-      objectReference: {fileID: 0}
-    - target: {fileID: 3101383441035492442, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: audioObjects.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3101383441035492442, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: audioObjects.Array.data[0].sound
-      value: 
-      objectReference: {fileID: 3101383440876657204}
-    - target: {fileID: 3101383441035492442, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: audioObjects.Array.data[0].identifier
-      value: Walk
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165817081911917294, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3617211771956438790, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-      propertyPath: m_Name
-      value: SFXManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
---- !u!82 &3101383440876657204 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 187732277966398787, guid: 9025e83a5076b9644a81e6b6268c2c41, type: 3}
-  m_PrefabInstance: {fileID: 3101383440876657203}
-  m_PrefabAsset: {fileID: 0}
