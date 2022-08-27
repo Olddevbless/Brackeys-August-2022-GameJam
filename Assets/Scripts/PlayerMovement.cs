@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     Transform playerHands;
     [SerializeField] FollowPlayer doggo;
     public bool isGrabable;
-    private GameObject touchObject;
+    public GameObject touchObject;
     private GameObject noteTouch;
 
     [Header("Climbing")]
@@ -121,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Boulder") && other.gameObject == touchObject)
         {
             touchObject = null;
+            grabBoulder = false;
         }
         if(other.CompareTag("Note") && other.gameObject == noteTouch)
         {
@@ -231,6 +232,17 @@ public class PlayerMovement : MonoBehaviour
         if (!notePrompt && notePromptCanvas != null)
         {
             notePromptCanvas.SetActive(false);
+        }
+        if(playerHands.transform.childCount!=0 && grabBoulder==false)
+        {
+            if(Vector3.Distance(playerHands.transform.GetChild(0).transform.position,playerHands.transform.position) >=2)
+            {
+                touchObject.transform.SetParent(null);
+
+                grabBoulder = false;
+                isSlowed = false;
+                playerHands.DetachChildren();
+            }
         }
         
         OnWall();
