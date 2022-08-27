@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Props Animations\Scripts\LayerMaskExampleScript.cs" />
     <Compile Include="Assets\Scripts\triggerCheck.cs" />
+    <Compile Include="Assets\Scripts\SoundRegistry.cs" />
     <Compile Include="Assets\Scripts\SmallEnemyController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Props Animations\Scripts\IKScript.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Assets\Props Animations\Scripts\SmoothCameraAdvanced.cs" />
     <Compile Include="Assets\Scripts\FollowPlayer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+    <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Packages\ForestPackage\Curved-Grounds\scripts\CurvedGround3D.cs" />
