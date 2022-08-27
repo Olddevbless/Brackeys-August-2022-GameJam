@@ -228,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
         {
             notePromptCanvas.SetActive(true);
         }
-        if (!notePrompt)
+        if (!notePrompt && notePromptCanvas != null)
         {
             notePromptCanvas.SetActive(false);
         }
