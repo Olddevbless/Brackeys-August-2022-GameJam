@@ -110,6 +110,10 @@ public class PlayerMovement : MonoBehaviour
                 notePrompt = true;
                 noteTouch = other.gameObject;
             }
+            if (other.CompareTag("Mud"))
+        {
+            isSlowed = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -122,6 +126,10 @@ public class PlayerMovement : MonoBehaviour
         {
             
             noteTouch = null;
+        }
+        if (other.CompareTag("Mud"))
+        {
+            isSlowed = false;
         }
     }
     private void Update()
