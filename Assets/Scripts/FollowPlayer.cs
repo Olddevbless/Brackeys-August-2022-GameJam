@@ -53,11 +53,11 @@ public class FollowPlayer : MonoBehaviour
     void Follow()
     {
         nav.destination = new Vector3(target.transform.position.x-followDistance,target.transform.position.y+2,target.transform.position.z);
-        
+
         // example of how to play sounds.
         // the "Walk" sound is registered on the SoundRegistry object (inspector).
         // just use SoundManager.Play(ID)
-        SoundManager.PlaySound("Walk");
+        SoundManager.PlaySound("");
     }
     public void Stay()
     {

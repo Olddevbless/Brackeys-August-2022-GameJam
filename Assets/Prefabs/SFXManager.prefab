@@ -169,12 +169,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3101383441035492443}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a6c749792f71e844a316901d944449c, type: 3}
+  m_Script: {fileID: 11500000, guid: 73efca8720dcefb4683274f077ac04fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSound:
-    sound: {fileID: 187732277966398787}
-    identifier: 
+  audioObjects: []
 --- !u!1 &3617211771956438790
 GameObject:
   m_ObjectHideFlags: 0
