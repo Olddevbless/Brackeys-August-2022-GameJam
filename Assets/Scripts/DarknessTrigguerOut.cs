@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DarknessTrigger : MonoBehaviour
+public class DarknessTrigguerOut : MonoBehaviour
 {
     [SerializeField] DarknessController darknessController;
     private void Awake()
@@ -14,9 +14,8 @@ public class DarknessTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && darknessController!=null)
         {
-            StopCoroutine(GameManager.current.Notice(""));
-            StartCoroutine( GameManager.current.Notice("Darkness comming, be redy to Bark (B)"));
-            darknessController.MoveTowardsPlayer();
+            darknessController.darknessSpeed =0;
+            Destroy(darknessController.gameObject, 4);
         }
     }
 }
