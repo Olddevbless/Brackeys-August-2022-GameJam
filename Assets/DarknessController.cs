@@ -53,6 +53,15 @@ public class DarknessController : MonoBehaviour
             other.GetComponent<PlayerMovement>().FreezeMovement();
         }
         // play animation for darkness grabbing the player
+<<<<<<< Updated upstream:Assets/DarknessController.cs
+=======
+        AnimationRegistry.PlayAnimation("darkness_grab");
+        
+        Invoke("ReloadLevel",2);
+    }
+    void ReloadLevel()
+    {
+>>>>>>> Stashed changes:Assets/Scripts/DarknessController.cs
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

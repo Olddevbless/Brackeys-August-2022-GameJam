@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2912a780-3301-4de0-bad1-8f71f307c27c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Animations/hikercombined (1).fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Animations/hikercombined (1).fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Packages/EmaceArt/Slavic World Free/URP_Support/URP/URP_Standard.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoundManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/SoundManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoundRegistry.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/SoundRegistry.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundRegistry.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundRegistry.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../ProjectSettings/ProjectVersion.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="2DwZxkOkF2Hel26pi7ckQG7EiuK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1661612358778</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1661612358778</updated>
+      <workItem from="1661612370327" duration="3000" />
+    </task>
+    <servers />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
