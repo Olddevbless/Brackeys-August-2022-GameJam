@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("Notification Panel")]
     [SerializeField] GameObject notificationPanel;
     [SerializeField] TMP_Text notificationTxt;
+    [SerializeField] GameObject mainMenu;
     void Awake()
     {
 
@@ -110,6 +111,9 @@ public class GameManager : MonoBehaviour
     }
    public void StartGame()
     {
+        if (mainMenu != null)
+            mainMenu.SetActive(false);
+
         SceneManager.LoadScene(1);
     }
    public void Options()
