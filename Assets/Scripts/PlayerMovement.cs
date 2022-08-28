@@ -204,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!grabBoulder && playerHands.transform.childCount !=0)
             {
-                touchObject.transform.SetParent(null);
+                //touchObject.transform.SetParent(null);
 
                 grabBoulder = false;
                 isSlowed = false;
@@ -339,8 +339,8 @@ public class PlayerMovement : MonoBehaviour
    
     public void FreezeMovement()
     {
-        StopCoroutine(GameManager.current.Notice(""));
-        StartCoroutine(GameManager.current.Notice("Freezed"));
+        //StopCoroutine(GameManager.current.Notice(""));
+        //StartCoroutine(GameManager.current.Notice("Freezed"));
         isFrozen = true;
         playerRB.constraints = RigidbodyConstraints.FreezeAll;
         
