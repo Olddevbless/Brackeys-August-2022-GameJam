@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
     public GameObject optionsPanel;
     public bool optionsPanelIsActive;
     bool mainMenuScene;
-    //[Header("Notification Panel")]
-    //[SerializeField] GameObject notificationPanel;
-    //[SerializeField] TMP_Text notificationTxt;
+    [Header("Notification Panel")]
+    [SerializeField] GameObject notificationPanel;
+    [SerializeField] TMP_Text notificationTxt;
     void Awake()
     {
 
@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
         optionsPanel = GameObject.Find("Options Panel");
         pauseMenu = GameObject.Find("PauseMenu");
-        //notificationPanel = GameObject.Find("NotiPanel");
-        //notificationTxt = GameObject.Find("NotiTxt").GetComponent<TMP_Text>();
-        //notificationPanel.SetActive(false);
+        notificationPanel = GameObject.Find("NotiPanel");
+        notificationTxt = GameObject.Find("NotiTxt").GetComponent<TMP_Text>();
+        notificationPanel.SetActive(false);
         if (instance != null)
         {
             Destroy(gameObject);
@@ -126,11 +126,11 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //public IEnumerator Notice(string info)
-    //{
-    //    notificationPanel.SetActive(true);
-    //    notificationTxt.text = info;
-    //    yield return new WaitForSeconds(3);
-    //    notificationPanel.SetActive(false);
-    //}
+    public IEnumerator Notice(string info)
+    {
+        notificationPanel.SetActive(true);
+        notificationTxt.text = info;
+        yield return new WaitForSeconds(3);
+       notificationPanel.SetActive(false);
+    }
 }

@@ -63,8 +63,8 @@ public class FollowPlayer : MonoBehaviour
     }
     public void Stay()
     {
-        //StopCoroutine(GameManager.current.Notice(""));
-        //StartCoroutine( GameManager.current.Notice("Dogo Stay"));
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine( GameManager.current.Notice("Dogo Stay"));
 
         Debug.Log("Staying");
         isFollowing =false;
@@ -75,8 +75,8 @@ public class FollowPlayer : MonoBehaviour
     }
     public void ComeHere()
     {
-        //StopCoroutine(GameManager.current.Notice(""));
-        //StartCoroutine(GameManager.current.Notice("Calling Dogo"));
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("Calling Dogo"));
 
         Debug.Log("coming!");
         nav.destination = target.transform.position;
@@ -88,8 +88,8 @@ public class FollowPlayer : MonoBehaviour
     public void Bark()
     {
         Stay();
-        //StopCoroutine(GameManager.current.Notice(""));
-        //StartCoroutine(GameManager.current.Notice("Dogo Bark"));
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("Dogo Bark"));
 
         Debug.Log("Barking");
         isBarking = true;

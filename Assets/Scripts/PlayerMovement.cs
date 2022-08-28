@@ -339,8 +339,8 @@ public class PlayerMovement : MonoBehaviour
    
     public void FreezeMovement()
     {
-        //StopCoroutine(GameManager.current.Notice(""));
-        //StartCoroutine(GameManager.current.Notice("Freezed"));
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("Freezed"));
         isFrozen = true;
         playerRB.constraints = RigidbodyConstraints.FreezeAll;
         
