@@ -80,8 +80,8 @@ public class FlashLight : MonoBehaviour
     //}
     public void DecreaceBatery()
     {
-        StopCoroutine(GameManager.current.Notice(""));
-        StartCoroutine(GameManager.current.Notice("Decreace flashlight battery"));
+        //StopCoroutine(GameManager.current.Notice(""));
+        //StartCoroutine(GameManager.current.Notice("Decreace flashlight battery"));
         currentBatteryLife = -3;
         lightSlider.gameObject.SetActive(true);
         lightSlider.gameObject.GetComponent<Animator>().ResetTrigger("AnimOn");

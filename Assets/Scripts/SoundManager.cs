@@ -34,10 +34,10 @@ public static class SoundManager
     
     public static void PlaySound(string identifier)
     {
-        AudioSource sound = _registeredSounds[identifier].sound;
+        //AudioSource sound = _registeredSounds[identifier].sound;
         
-        if (sound.isPlaying) return;
+        //if (sound.isPlaying) return;
         
-        sound.Play();
+        //sound.Play();
     }
 }

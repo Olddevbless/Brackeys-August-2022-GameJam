@@ -116,27 +116,27 @@ public class SmallEnemyController : MonoBehaviour
         //isPositioning = false;
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
-        StopCoroutine(GameManager.current.Notice(""));
-        StopCoroutine(GameManager.current.Notice("Shadow death by light"));
+        //StopCoroutine(GameManager.current.Notice(""));
+        //StopCoroutine(GameManager.current.Notice("Shadow death by light"));
     }
     void DestroyPlayer()
     {
-        StopCoroutine(GameManager.current.Notice(""));
-        StartCoroutine(GameManager.current.Notice("You died..."));
+        //StopCoroutine(GameManager.current.Notice(""));
+        //StartCoroutine(GameManager.current.Notice("You died..."));
         player.GetComponent<PlayerMovement>().isDead = true;
         player.GetComponent<PlayerMovement>().FreezeMovement();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     void SlowPlayer()
     {
-        StopCoroutine(GameManager.current.Notice(""));
-        StartCoroutine(GameManager.current.Notice("Slowed"));
+        //StopCoroutine(GameManager.current.Notice(""));
+        //StartCoroutine(GameManager.current.Notice("Slowed"));
         player.GetComponent<PlayerMovement>().isSlowed = true;
     }
     void DisableFlashlight()
     {
-        StopCoroutine(GameManager.current.Notice(""));
-        StartCoroutine(GameManager.current.Notice("Decreace Flashlight battery"));
+        //StopCoroutine(GameManager.current.Notice(""));
+        //StartCoroutine(GameManager.current.Notice("Decreace Flashlight battery"));
         player.GetComponentInChildren<FlashLight>().DecreaceBatery() ;
     }
 

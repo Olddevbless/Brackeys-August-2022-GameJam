@@ -73,8 +73,8 @@ public class DarknessController : MonoBehaviour
             followingPlayer = false;
             other.GetComponent<PlayerMovement>().FreezeMovement();
             other.GetComponent<PlayerMovement>().isDead = true;
-            StopCoroutine(GameManager.current.Notice(""));
-            StartCoroutine(GameManager.current.Notice("you died..."));
+            //StopCoroutine(GameManager.current.Notice(""));
+            //StartCoroutine(GameManager.current.Notice("you died..."));
         }
         // play animation for darkness grabbing the player
         Invoke("ReloadLevel",2);

@@ -61,9 +61,9 @@ public class PlayerMovement : MonoBehaviour
     int layerID = 8;
     LayerMask scalableWallsMask;
 
-    [Header("SFX")]
-    [SerializeField] AudioSource playerAudio;
-    [SerializeField] AudioClip walkingSurfaceSFX;
+    //[Header("SFX")]
+    //[SerializeField] AudioSource playerAudio;
+    //[SerializeField] AudioClip walkingSurfaceSFX;
     
     
 
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        playerAudio = this.GetComponent<AudioSource>();
+        //playerAudio = this.GetComponent<AudioSource>();
         notePromptCanvas = GameObject.Find("NotePrompt");
         playerHands = transform.Find("PlayerHands");
         playerModel = GameObject.Find("PlayerModel");
@@ -94,11 +94,12 @@ public class PlayerMovement : MonoBehaviour
     {
             isGrabable = true;
             if (other.CompareTag("Boulder") )
-            {                    
-                    if(playerHands.childCount == 0)
+            {
+            touchObject = other.gameObject;
+            if (playerHands.childCount == 0)
                     {
                         grabBoulder = true;
-                        touchObject = other.gameObject;
+                        
                     }
                     else
                     {
@@ -195,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Time.timeScale = 0;
         }
-        else if (!gameManager.pauseMenuIsActive)
+        if (!gameManager.pauseMenuIsActive|| !noteReading)
         {
             Time.timeScale =1;
         }
@@ -235,9 +236,9 @@ public class PlayerMovement : MonoBehaviour
         }
         if(playerHands.transform.childCount!=0 && grabBoulder==false)
         {
-            if(Vector3.Distance(playerHands.transform.GetChild(0).transform.position,playerHands.transform.position) >=2)
+            if(Vector3.Distance(playerHands.transform.GetChild(0).transform.position,playerHands.transform.position) >=4)
             {
-                touchObject.transform.SetParent(null);
+                //touchObject.transform.SetParent(null);
 
                 grabBoulder = false;
                 isSlowed = false;
@@ -338,8 +339,8 @@ public class PlayerMovement : MonoBehaviour
    
     public void FreezeMovement()
     {
-        StopCoroutine(GameManager.current.Notice(""));
-        StartCoroutine(GameManager.current.Notice("Freezed"));
+        //StopCoroutine(GameManager.current.Notice(""));
+        //StartCoroutine(GameManager.current.Notice("Freezed"));
         isFrozen = true;
         playerRB.constraints = RigidbodyConstraints.FreezeAll;
         

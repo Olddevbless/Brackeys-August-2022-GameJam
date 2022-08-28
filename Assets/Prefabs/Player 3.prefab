@@ -133,8 +133,8 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 10
-  m_Range: 8
-  m_SpotAngle: 55
+  m_Range: 7.03
+  m_SpotAngle: 66
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -260,8 +260,6 @@ MonoBehaviour:
   touchObject: {fileID: 0}
   rayHeightOffset: 0.82
   climbSpeed: 3
-  playerAudio: {fileID: 0}
-  walkingSurfaceSFX: {fileID: 0}
 --- !u!54 &1205216863
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1464,15 +1462,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d4634e6b63eeb4f469d33431ac186fef, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1694.3999
+      value: 2964.7659
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d4634e6b63eeb4f469d33431ac186fef, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3460.5642
+      value: 3281.1963
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d4634e6b63eeb4f469d33431ac186fef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.36489
+      value: -1.942
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d4634e6b63eeb4f469d33431ac186fef, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1480,7 +1478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d4634e6b63eeb4f469d33431ac186fef, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.9064
+      value: 26.132
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d4634e6b63eeb4f469d33431ac186fef, type: 3}
       propertyPath: m_LocalRotation.w
