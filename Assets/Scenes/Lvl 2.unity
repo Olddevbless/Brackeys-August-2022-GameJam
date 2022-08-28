@@ -69812,6 +69812,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5252835803888030296, guid: b4ba9467107234d4786c1bbfc5793183, type: 3}
+      propertyPath: m_text
+      value: Buddy too far away
+      objectReference: {fileID: 0}
     - target: {fileID: 9011737061460473679, guid: b4ba9467107234d4786c1bbfc5793183, type: 3}
       propertyPath: m_IsActive
       value: 1
