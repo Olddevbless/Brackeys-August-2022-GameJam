@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameManager instance;
@@ -11,6 +12,9 @@ public class GameManager : MonoBehaviour
     public GameObject optionsPanel;
     public bool optionsPanelIsActive;
     bool mainMenuScene;
+    [Header("Notification Panel")]
+    [SerializeField] GameObject notificationPanel;
+    [SerializeField] TextMeshPro notificationTxt;
     void Awake()
     {
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
