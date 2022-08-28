@@ -804,26 +804,6 @@
       <Project>{47E118A7-2519-F31C-65EC-3B9A460EDF5C}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="Boxophobic.Utils.Editor.csproj">
-      <Project>{8D91BE42-FC5F-0747-001D-8841002D6CAB}</Project>
-      <Name>Boxophobic.Utils.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Boxophobic.PolyverseSkies.Editor.csproj">
-      <Project>{88B437C2-9F89-5032-0D45-25E97C7C24B6}</Project>
-      <Name>Boxophobic.PolyverseSkies.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Boxophobic.Utils.Scripts.csproj">
-      <Project>{E586558D-C60A-157C-10BB-0C7148094671}</Project>
-      <Name>Boxophobic.Utils.Scripts</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{8C38B7FB-70C5-8253-3C38-BB17EFB0BAED}</Project>
-      <Name>NavMeshComponentsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{1F15C8AF-5BA6-6DA1-B9B8-222787964F36}</Project>
-      <Name>NavMeshComponents</Name>
-    </ProjectReference>
     <ProjectReference Include="Boxophobic.PolyverseSkies.Scripts.csproj">
       <Project>{4F488711-45AE-CDB3-0C3F-6D36875E9970}</Project>
       <Name>Boxophobic.PolyverseSkies.Scripts</Name>
@@ -831,6 +811,26 @@
     <ProjectReference Include="Boxophobic.PolyverseSkies.Runtime.csproj">
       <Project>{8075B62E-87B9-523A-A9AC-8E1A54928C53}</Project>
       <Name>Boxophobic.PolyverseSkies.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{1F15C8AF-5BA6-6DA1-B9B8-222787964F36}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="Boxophobic.Utils.Editor.csproj">
+      <Project>{8D91BE42-FC5F-0747-001D-8841002D6CAB}</Project>
+      <Name>Boxophobic.Utils.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Boxophobic.Utils.Scripts.csproj">
+      <Project>{E586558D-C60A-157C-10BB-0C7148094671}</Project>
+      <Name>Boxophobic.Utils.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="Boxophobic.PolyverseSkies.Editor.csproj">
+      <Project>{88B437C2-9F89-5032-0D45-25E97C7C24B6}</Project>
+      <Name>Boxophobic.PolyverseSkies.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{8C38B7FB-70C5-8253-3C38-BB17EFB0BAED}</Project>
+      <Name>NavMeshComponentsEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
