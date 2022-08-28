@@ -245,13 +245,20 @@ public class PlayerMovement : MonoBehaviour
                 playerHands.DetachChildren();
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if(runing== false)
+            {
+
+            }
+        }
         OnWall();
         Movement();
         Jump();
         Crouching();
         
     }
+    bool runing = false;
     public void Jump()
     {
         if (jumpBufferCounter>0 && coyoteTimeCounter>0&& playerHands.transform.childCount == 0)
