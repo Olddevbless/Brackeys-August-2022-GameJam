@@ -12,8 +12,10 @@ public class DarknessTrigger : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && darknessController!=null)
         {
+            StopCoroutine(GameManager.current.Notice(""));
+            StartCoroutine( GameManager.current.Notice("Darkness comming, be redy to Bark (B)"));
             darknessController.MoveTowardsPlayer();
         }
     }

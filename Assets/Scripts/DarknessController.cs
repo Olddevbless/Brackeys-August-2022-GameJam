@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class DarknessController : MonoBehaviour
 {
     GameObject target;
-    [SerializeField] float darknessSpeed;
+    [SerializeField] public float darknessSpeed;
     [SerializeField] public bool followingPlayer;
     FollowPlayer doggo;
     [SerializeField] float distanceFromDoggo;
