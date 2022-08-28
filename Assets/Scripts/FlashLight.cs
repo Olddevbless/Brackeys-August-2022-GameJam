@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FlashLight : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class FlashLight : MonoBehaviour
     [SerializeField] GameObject lightCollider;
     [SerializeField] float lightColliderX;
     [SerializeField] float lightColliderScaleZ;
+    [SerializeField] Slider lightSlider;
 
     void Start()
     {
@@ -20,6 +22,7 @@ public class FlashLight : MonoBehaviour
         currentBatteryLife = maxbatteryLife;
         lightCollider = GameObject.Find("LightCone");
         lightCollider.SetActive(false);
+        lightSlider.maxValue = maxbatteryLife;
     }
 
     // Update is called once per frame
@@ -45,7 +48,7 @@ public class FlashLight : MonoBehaviour
                 ToggleLight();
                 
             }
-
+            lightSlider.gameObject.SetActive(true);
         }
         else
         {
@@ -56,9 +59,13 @@ public class FlashLight : MonoBehaviour
                 currentBatteryLife = currentBatteryLife + Time.deltaTime;
 
             }
+            else
+            {
+                lightSlider.gameObject.SetActive(false);
+            }
             lightEmission.intensity = 0;
         }
-        
+        lightSlider.value = currentBatteryLife;
     }
     
     public void ToggleLight()
@@ -71,6 +78,13 @@ public class FlashLight : MonoBehaviour
     //{
        // if (other.CompareTag(""))
     //}
-
+    public void DecreaceBatery()
+    {
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("Decreace flashlight battery"));
+        currentBatteryLife = -3;
+        lightSlider.gameObject.SetActive(true);
+        lightSlider.gameObject.GetComponent<Animator>().ResetTrigger("AnimOn");
+    }
 
 }

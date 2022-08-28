@@ -63,27 +63,40 @@ public class FollowPlayer : MonoBehaviour
     }
     public void Stay()
     {
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine( GameManager.current.Notice("Dogo Stay"));
+
         Debug.Log("Staying");
         isFollowing =false;
         nav.destination = transform.position;
+        nav.isStopped=true;
         isStaying = true;
 
     }
     public void ComeHere()
     {
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("Calling Dogo"));
+
         Debug.Log("coming!");
         nav.destination = target.transform.position;
         isFollowing = true;
         isBarking = false;
         isStaying = false;
+        nav.isStopped = false;
     }
     public void Bark()
     {
-        if (isStaying)
+        Stay();
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("Dogo Bark"));
+
+        Debug.Log("Barking");
+        isBarking = true;
+
+        /*if (isStaying)
         {
-            Debug.Log("Barking");
-            isBarking = true;
-        }
+        }*/
         if (!isStaying)
         {
             Debug.Log("Buddy cannot bark, it is following");

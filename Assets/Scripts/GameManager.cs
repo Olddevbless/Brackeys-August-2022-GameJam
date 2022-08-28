@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 public class GameManager : MonoBehaviour
 {
+    public static GameManager current;
+
     public GameManager instance;
     public GameObject pauseMenu;
     public bool pauseMenuIsActive;
@@ -14,12 +16,17 @@ public class GameManager : MonoBehaviour
     bool mainMenuScene;
     [Header("Notification Panel")]
     [SerializeField] GameObject notificationPanel;
-    [SerializeField] TextMeshPro notificationTxt;
+    [SerializeField] TMP_Text notificationTxt;
     void Awake()
     {
+
+        current = this;
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
         optionsPanel = GameObject.Find("Options Panel");
         pauseMenu = GameObject.Find("PauseMenu");
+        notificationPanel = GameObject.Find("NotiPanel");
+        notificationTxt = GameObject.Find("NotiTxt").GetComponent<TMP_Text>();
+        notificationPanel.SetActive(false);
         if (instance != null)
         {
             Destroy(gameObject);
@@ -116,5 +123,13 @@ public class GameManager : MonoBehaviour
             optionsPanel.SetActive(false);
         }
 
+    }
+
+    public IEnumerator Notice(string info)
+    {
+        notificationPanel.SetActive(true);
+        notificationTxt.text = info;
+        yield return new WaitForSeconds(3);
+        notificationPanel.SetActive(false);
     }
 }

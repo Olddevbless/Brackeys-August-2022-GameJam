@@ -13,11 +13,15 @@ public class DarknessController : MonoBehaviour
     [SerializeField] float barkRange;
     [SerializeField] bool darknessInitiated;
     Vector3 offSet = new Vector3(0f, -5f, 0f);
+
+    private bool scared = false;
+    private int secondScared = 3;
     private void Awake()
     {
         followingPlayer = false;
         doggo = FindObjectOfType<FollowPlayer>();
         target = FindObjectOfType<PlayerMovement>().gameObject;
+        secondScared = 3;
     }
 
     // Update is called once per frame
@@ -34,16 +38,26 @@ public class DarknessController : MonoBehaviour
         {
             followingPlayer = true;
         }
-        if (distanceFromDoggo <= barkRange && doggo.isBarking)
+        if (distanceFromDoggo <= barkRange && doggo.isBarking && scared == false && secondScared>0)
         {
-            followingPlayer = false;
+            StartCoroutine(Scared());
         }
         if (followingPlayer)
-        { 
+        {
             MoveTowardsPlayer();
         }
-        
-        
+
+
+    }
+    IEnumerator Scared()
+    {
+        scared = true;
+        followingPlayer = false;
+        yield return new WaitForSeconds(secondScared);
+        secondScared--;
+        darknessSpeed++;
+        followingPlayer = true;
+        scared = false;
     }
     public void MoveTowardsPlayer()
     {
@@ -59,6 +73,8 @@ public class DarknessController : MonoBehaviour
             followingPlayer = false;
             other.GetComponent<PlayerMovement>().FreezeMovement();
             other.GetComponent<PlayerMovement>().isDead = true;
+            StopCoroutine(GameManager.current.Notice(""));
+            StartCoroutine(GameManager.current.Notice("you died..."));
         }
         // play animation for darkness grabbing the player
         Invoke("ReloadLevel",2);

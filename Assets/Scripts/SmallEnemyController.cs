@@ -89,7 +89,7 @@ public class SmallEnemyController : MonoBehaviour
                 }
                 if (attackOptions == 3)
                 {
-                    Invoke("DisableFlashLight", 1.5f);
+                    Invoke("DisableFlashlight", 1.5f);
                 }
                 break;
             case smallEnemyFSM.Scared:
@@ -116,20 +116,28 @@ public class SmallEnemyController : MonoBehaviour
         //isPositioning = false;
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
+        StopCoroutine(GameManager.current.Notice(""));
+        StopCoroutine(GameManager.current.Notice("Shadow death by light"));
     }
     void DestroyPlayer()
     {
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("You died..."));
         player.GetComponent<PlayerMovement>().isDead = true;
         player.GetComponent<PlayerMovement>().FreezeMovement();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     void SlowPlayer()
     {
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("Slowed"));
         player.GetComponent<PlayerMovement>().isSlowed = true;
     }
     void DisableFlashlight()
     {
-        player.GetComponentInChildren<FlashLight>().currentBatteryLife = -3;
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("Decreace Flashlight battery"));
+        player.GetComponentInChildren<FlashLight>().DecreaceBatery() ;
     }
 
     void OnDrawGizmos()
@@ -140,6 +148,8 @@ public class SmallEnemyController : MonoBehaviour
     }
     void Scared()
     {
+       // StopCoroutine(GameManager.current.Notice(""));
+      //  StartCoroutine(GameManager.current.Notice("Shadow scared"));
         Debug.Log("Scared");
         this.transform.position = this.transform.position;
         //play scared animation

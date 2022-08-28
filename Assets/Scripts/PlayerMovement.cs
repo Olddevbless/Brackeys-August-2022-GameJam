@@ -338,6 +338,8 @@ public class PlayerMovement : MonoBehaviour
    
     public void FreezeMovement()
     {
+        StopCoroutine(GameManager.current.Notice(""));
+        StartCoroutine(GameManager.current.Notice("Freezed"));
         isFrozen = true;
         playerRB.constraints = RigidbodyConstraints.FreezeAll;
         
@@ -414,7 +416,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-   
+   /* public IEnumerator SpeedRecoverd()
+    {
+        yield return new WaitForSeconds(2);
+        isSlowed = false;
+        speed = 8;
+
+    }
+    public void EnemySpeedTouch()
+    {
+        isSlowed = true;
+        SpeedRecoverd();
+    }*/
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
