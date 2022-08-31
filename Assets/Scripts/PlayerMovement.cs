@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
+    [SerializeField] Animator playerAnimator;
     [Header("Movement")]
     public float speed = 1;
     public bool isSlowed;
@@ -99,11 +99,12 @@ public class PlayerMovement : MonoBehaviour
             if (playerHands.childCount == 0)
                     {
                         grabBoulder = true;
-                        
+                        playerAnimator.SetBool("isPushing", true);
                     }
                     else
                     {
                         grabBoulder = false;
+                        playerAnimator.SetBool("isPushing", false);
                     }
             }
             if (other.CompareTag("Note"))
@@ -252,6 +253,15 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
+        if (playerIsMoving)
+        {
+            playerAnimator.SetBool("isRunning", true);
+
+        }
+        else
+        {
+            playerAnimator.SetBool("isRunning", false);
+        }
         OnWall();
         Movement();
         Jump();
@@ -266,6 +276,7 @@ public class PlayerMovement : MonoBehaviour
             playerRB.AddForce(Vector3.up *jumpForce, ForceMode.Impulse);
             coyoteTimeCounter = 0;
             jumpBufferCounter = 0;
+            playerAnimator.SetTrigger("Jump");
         }
     }
     void Crouching()
@@ -274,6 +285,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.C))
         {
+            playerAnimator.SetBool("isCrouching", true);
             speed = crouchSpeed;
             gameObject.GetComponent<CapsuleCollider>().height = crouchHeight; // set collider height to crouch height
 
@@ -287,6 +299,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            playerAnimator.SetBool("isCrouching", false);
             gameObject.GetComponent<CapsuleCollider>().height = crouchHeight * 2;
             gameObject.GetComponent<CapsuleCollider>().center = new Vector3(capsuleColliderCenter.x, 0f, capsuleColliderCenter.z);
             speed = 5;

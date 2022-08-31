@@ -14,7 +14,7 @@ public class FollowPlayer : MonoBehaviour
     public bool isStaying;
     NavMeshAgent nav;
     [SerializeField] bool isIdle;
-
+    [SerializeField] Animator buddyAnimator;
     void Start()
     {
         isIdle = false;
@@ -49,6 +49,23 @@ public class FollowPlayer : MonoBehaviour
                 isBarking = false;
             }
         }
+        if (isFollowing)
+        {
+            buddyAnimator.SetBool("isRunning", true);
+        }
+        else
+        {
+            buddyAnimator.SetBool("isRunning", false);
+        }
+        if (isBarking)
+        {
+            buddyAnimator.SetBool("isBarking", true);
+        }
+        else
+        {
+            buddyAnimator.SetBool("isBarking", false);
+        }
+        
     }
     void Follow()
     {
@@ -100,6 +117,13 @@ public class FollowPlayer : MonoBehaviour
         if (!isStaying)
         {
             Debug.Log("Buddy cannot bark, it is following");
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("NavMeshLinks"))
+        {
+            buddyAnimator.SetTrigger("Jump");
         }
     }
 }
