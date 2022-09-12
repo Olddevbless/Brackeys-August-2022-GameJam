@@ -10,6 +10,7 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] float followDistance;
     [SerializeField] bool isFollowing;
     [SerializeField] bool playerIsMoving;
+    [SerializeField] float jumpHeight;
     public bool isBarking;
     public bool isStaying;
     NavMeshAgent nav;
@@ -53,7 +54,7 @@ public class FollowPlayer : MonoBehaviour
         {
             buddyAnimator.SetBool("isRunning", true);
         }
-        else
+        if (isFollowing == false)
         {
             buddyAnimator.SetBool("isRunning", false);
         }
@@ -65,11 +66,15 @@ public class FollowPlayer : MonoBehaviour
         {
             buddyAnimator.SetBool("isBarking", false);
         }
+        if (transform.position.y > transform.position.y+jumpHeight)
+        {
+            buddyAnimator.SetTrigger("Jump");
+        }
         
     }
     void Follow()
     {
-        nav.destination = new Vector3(target.transform.position.x-followDistance,target.transform.position.y+2,target.transform.position.z);
+        nav.destination = new Vector3(target.transform.position.x-(followDistance/2),target.transform.position.y+2,target.transform.position.z);
 
 
         // example of how to play sounds.

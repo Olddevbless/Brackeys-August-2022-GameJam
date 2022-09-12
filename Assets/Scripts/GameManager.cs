@@ -7,17 +7,19 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager current;
-
+    
     public GameManager instance;
     public GameObject pauseMenu;
     public bool pauseMenuIsActive;
     public GameObject optionsPanel;
     public bool optionsPanelIsActive;
     bool mainMenuScene;
-    [Header("Notification Panel")]
-    [SerializeField] GameObject notificationPanel;
-    [SerializeField] TMP_Text notificationTxt;
-    [SerializeField] GameObject mainMenu;
+    public int score;
+    GameObject notificationPanel;
+    TMP_Text notificationTxt;
+    Scene mainMenu;
+
+
     void Awake()
     {
 
@@ -25,8 +27,8 @@ public class GameManager : MonoBehaviour
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
         optionsPanel = GameObject.Find("Options Panel");
         pauseMenu = GameObject.Find("PauseMenu");
-        notificationPanel = GameObject.Find("NotiPanel");
-        notificationTxt = GameObject.Find("NotiTxt").GetComponent<TMP_Text>();
+         notificationPanel = GameObject.Find("NotiPanel");
+         notificationTxt = GameObject.Find("NotiTxt").GetComponent<TMP_Text>();
         notificationPanel.SetActive(false);
         if (instance != null)
         {
@@ -112,7 +114,7 @@ public class GameManager : MonoBehaviour
    public void StartGame()
     {
         if (mainMenu != null)
-            mainMenu.SetActive(false);
+            mainMenuScene= false;
 
         SceneManager.LoadScene(1);
     }
@@ -136,5 +138,10 @@ public class GameManager : MonoBehaviour
         notificationTxt.text = info;
         yield return new WaitForSeconds(3);
        notificationPanel.SetActive(false);
+    }
+
+    public void IncreaseScore(int value)
+    {
+        
     }
 }
