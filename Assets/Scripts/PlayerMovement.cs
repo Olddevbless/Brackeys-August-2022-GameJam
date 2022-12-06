@@ -54,8 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Climbing")]
     //[SerializeField] bool onWall;
-    //[SerializeField] bool onRightWall;
-    //[SerializeField] bool onLeftWall;
+    [SerializeField] bool onRightWall;
+    [SerializeField] bool onLeftWall;
     [SerializeField] float rayHeightOffset;
     [SerializeField] float climbSpeed;
     int layerID = 8;
@@ -396,15 +396,29 @@ public class PlayerMovement : MonoBehaviour
             // high or low animation
             transform.Translate(Vector3.down * climbSpeed * Time.deltaTime);
         }
+       if (Input.GetKeyDown(KeyCode.Space)&& (BotLeftRay()||TopLeftRay()))
+        {
+            playerRB.AddForce(Vector3.up *jumpForce, ForceMode.Impulse);
+            playerRB.AddForce(Vector3.right*jumpForce, ForceMode.Impulse);
+            
+            
+        }
+       if (Input.GetKeyDown(KeyCode.Space) && (BotRightRay() || TopRightRay()))
+        {
+            playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerRB.AddForce(Vector3.left * jumpForce, ForceMode.Impulse);
+            
+            
+        }
 
-        
-        
+
+
     }
     [SerializeField] private bool BotLeftRay() => RayCheck(Vector3.left, false);
     [SerializeField] private bool TopLeftRay() => RayCheck(Vector3.left, true);
     [SerializeField] private bool BotRightRay() => RayCheck(Vector3.right, false);
     [SerializeField] private bool TopRightRay() => RayCheck(Vector3.right, true);
-    [SerializeField] private bool OnAnyWall() => BotLeftRay()||TopLeftRay()||BotRightRay()||TopRightRay();
+    [SerializeField] public bool OnAnyWall() => BotLeftRay()||TopLeftRay()||BotRightRay()||TopRightRay();
     public bool RayCheck(Vector3 dir, bool positive)
     {
         float offSetPos;

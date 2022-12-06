@@ -66,10 +66,7 @@ public class FollowPlayer : MonoBehaviour
         {
             buddyAnimator.SetBool("isBarking", false);
         }
-        if (transform.position.y > transform.position.y+jumpHeight)
-        {
-            buddyAnimator.SetTrigger("Jump");
-        }
+        
         
     }
     void Follow()

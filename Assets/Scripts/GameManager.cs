@@ -27,9 +27,9 @@ public class GameManager : MonoBehaviour
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
         optionsPanel = GameObject.Find("Options Panel");
         pauseMenu = GameObject.Find("PauseMenu");
-         notificationPanel = GameObject.Find("NotiPanel");
-         notificationTxt = GameObject.Find("NotiTxt").GetComponent<TMP_Text>();
-        notificationPanel.SetActive(false);
+         //notificationPanel = GameObject.Find("NotiPanel");
+         //notificationTxt = GameObject.Find("NotiTxt").GetComponent<TMP_Text>();
+        //notificationPanel.SetActive(false);
         if (instance != null)
         {
             Destroy(gameObject);
